@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <!-- 扫描使用了@Controller注解的类, 并放入spring容器 -->
+    <context:component-scan base-package="com.kaishengit.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 注解驱动 开启MVC 注解 -->
+    <mvc:annotation-driven/>
+
+    <!-- 视图解析器 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <!-- 支持jstl -->
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <!-- 视图前缀 -->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <!-- 视图后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 静态资源 -->
+    <mvc:resources mapping="/static/**" location="/static/"/>
+
+    <!-- 文件上传解析器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="2048000000"/>
+    </bean>
+
+    <!-- 拦截器(可配置多个拦截器) -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.kaishengit.controller.FileUploadController"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

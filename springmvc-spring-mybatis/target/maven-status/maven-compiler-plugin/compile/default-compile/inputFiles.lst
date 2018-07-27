@@ -1,0 +1,15 @@
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\entity\Parts.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\entity\PartsExample.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\controller\TypeController.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\exception\NotFoundException.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\service\PartsService.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\controller\exceptionHandler\ControllerExceptionHandler.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\service\impl\TypeServiceImpl.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\entity\Type.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\service\impl\PartsServiceImpl.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\controller\PartsController.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\entity\TypeExample.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\mapper\PartsMapper.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\service\TypeService.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\mapper\TypeMapper.java
+D:\java\idea\springmvc-spring-mybatis\src\main\java\com\kaishengit\utils\Constant.java

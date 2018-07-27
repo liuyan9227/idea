@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="com.kaishengit.dao.UserDao"/>
+    <bean id="userService" class="com.kaishengit.service.UserService">
+        <!-- name:是service中的set方法名 | ref:是依赖注入的Dao的id名 -->
+        <property name="userDao" ref="userDao"/>
+
+        <!-- 所有service的属性都在service的bean节点中配置, 需要在service中提供各属性的set方法 -->
+        <!-- Integer age -->
+        <property name="age" value="23"/>
+        <!-- String name -->
+        <property name="name" value="max"/>
+        <!-- List<String> list -->
+        <property name="list">
+            <list>
+                <value>hello</value>
+                <value>haha</value>
+                <value>hehe</value>
+            </list>
+        </property>
+        <!-- Set<Double> set -->
+        <property name="set">
+            <set>
+                <value>66.66</value>
+                <value>88.88</value>
+            </set>
+        </property>
+        <!-- Map<String, String> map -->
+        <property name="map">
+            <map>
+                <entry key="tom" value="26"/>
+                <entry key="jack" value="25"/>
+            </map>
+        </property>
+        <!-- Properties properties -->
+        <property name="properties">
+            <props>
+                <prop key="driver">com.mysql.jdbc.Driver</prop>
+                <prop key="me">hao</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

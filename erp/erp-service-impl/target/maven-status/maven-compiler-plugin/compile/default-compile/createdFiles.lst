@@ -1,0 +1,5 @@
+com\kaishengit\erp\impl\TypeServiceImpl.class
+com\kaishengit\erp\mapper\TypeMapper.class
+com\kaishengit\erp\impl\PartsServiceImpl.class
+com\kaishengit\erp\mapper\CustomerMapper.class
+com\kaishengit\erp\mapper\PartsMapper.class
