@@ -2,6 +2,8 @@ package com.kaishengit.erp.service;
 
 import com.kaishengit.erp.entity.Employee;
 
+import java.util.List;
+
 /**
  * @author liuyan
  * @date 2018/7/26
@@ -14,4 +16,31 @@ public interface EmployeeService {
      * @return 对象用作前端显示
      */
     Employee findTelAndPassword(String userTel, String password, String ip);
+
+    /**
+     * 查找所有员工信息
+     * @return 员工列表
+     */
+    List<Employee> findAll();
+
+    /**
+     * 保存账户新增页面信息
+     * @param employee 新增员工信息
+     * @param roleIds 新增员工的角色信息
+     */
+    void save(Employee employee, Integer[] roleIds);
+
+    /**
+     * 根据员工ID查询员工的信息和员工的角色列表
+     * @param id
+     * @return
+     */
+    List<Employee> findEmployeeAndRoles(Integer id);
+
+    /**
+     * 回显员工信息
+     * @param id
+     * @return
+     */
+    Employee findEmployee(Integer id);
 }

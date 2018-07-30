@@ -8,6 +8,13 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
+    <collection property="roleList" ofType="com.kaishengit.erp.entity.Role">
+        <id column="id" property="id"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </collection>
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

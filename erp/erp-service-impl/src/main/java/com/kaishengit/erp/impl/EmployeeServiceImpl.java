@@ -3,9 +3,11 @@ package com.kaishengit.erp.impl;
 import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.EmployeeExample;
 import com.kaishengit.erp.entity.EmployeeLoginLog;
+import com.kaishengit.erp.entity.EmployeeRole;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.mapper.EmployeeLoginLogMapper;
 import com.kaishengit.erp.mapper.EmployeeMapper;
+import com.kaishengit.erp.mapper.EmployeeRoleMapper;
 import com.kaishengit.erp.service.EmployeeService;
 import com.kaishengit.erp.utils.Constant;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -31,6 +33,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeLoginLogMapper employeeLoginLogMapper;
+
+    @Autowired
+    private EmployeeRoleMapper employeeRoleMapper;
 
 
     /**
@@ -77,5 +82,64 @@ public class EmployeeServiceImpl implements EmployeeService {
         } else {
             throw new ServiceException("用户名或密码的错误");
         }
+    }
+
+    /**
+     * 查找所有员工信息
+     * @return 员工列表
+     */
+    @Override
+    public List<Employee> findAll() {
+        EmployeeExample employeeExample = new EmployeeExample();
+        List<Employee> employeeList = employeeMapper.selectByExample(employeeExample);
+
+        return employeeList;
+    }
+
+    /**
+     * 保存账户新增页面信息
+     * @param employee 新增员工信息
+     * @param roleIds   新增员工的角色信息
+     */
+    @Override
+    public void save(Employee employee, Integer[] roleIds) {
+        // 保存新增员工信息, 密码需要md5加密
+        String password = employee.getPassword();
+        String passwordMd5 = DigestUtils.md5Hex(password);
+        employee.setPassword(passwordMd5);
+        employeeMapper.insertSelective(employee);
+        // 保存员工的角色列表,添加关联关系表
+        EmployeeRole employeeRole = new EmployeeRole();
+        for(Integer id : roleIds){
+            employeeRole.setRoleId(id);
+            employeeRole.setEmployeeId(employee.getId());
+            employeeRoleMapper.insertSelective(employeeRole);
+        }
+    }
+
+    /**
+     * 根据员工ID查询员工的信息和员工的角色列表
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Employee> findEmployeeAndRoles(Integer id) {
+        EmployeeExample employeeExample = new EmployeeExample();
+        employeeExample.createCriteria().andIdEqualTo(id);
+        List<Employee> employeeList = employeeMapper.selectByExample(employeeExample);
+        return employeeList;
+    }
+
+    /**
+     * 回显员工信息
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee findEmployee(Integer id) {
+        Employee employee = employeeMapper.selectByPrimaryKey(id);
+        return employee;
     }
 }

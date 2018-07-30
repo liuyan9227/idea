@@ -2,6 +2,7 @@ package com.kaishengit.erp.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -36,6 +37,19 @@ public class Employee implements Serializable {
      * 状态：0.禁用 1正常
      */
     private Integer state;
+
+    /**
+     * 角色列表
+     */
+    private List<Role> roleList;
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -122,18 +136,14 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", employeeName=").append(employeeName);
-        sb.append(", employeeTel=").append(employeeTel);
-        sb.append(", password=").append(password);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", state=").append(state);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Employee{" +
+                "id=" + id +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeTel='" + employeeTel + '\'' +
+                ", password='" + password + '\'' +
+                ", createTime=" + createTime +
+                ", state=" + state +
+                ", roleList=" + roleList +
+                '}';
     }
 }
