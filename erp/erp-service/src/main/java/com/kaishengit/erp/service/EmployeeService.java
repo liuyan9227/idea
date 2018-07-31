@@ -1,6 +1,7 @@
 package com.kaishengit.erp.service;
 
 import com.kaishengit.erp.entity.Employee;
+import com.kaishengit.erp.entity.EmployeeLoginLog;
 
 import java.util.List;
 
@@ -43,4 +44,16 @@ public interface EmployeeService {
      * @return
      */
     Employee findEmployee(Integer id);
+
+    /**
+     * 根据Tel查找对象
+     * @return
+     */
+    Employee findEmployeeByTel(String userTel);
+
+    /**
+     * 保存记录日志
+     * @param employeeLoginLog
+     */
+    void saveLoginLog(EmployeeLoginLog employeeLoginLog);
 }

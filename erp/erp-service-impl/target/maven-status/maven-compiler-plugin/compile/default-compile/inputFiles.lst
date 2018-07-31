@@ -5,6 +5,7 @@ D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\RoleMa
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\RolePermissionServiceImpl.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\TypeServiceImpl.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\CustomerMapper.java
+D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\shiro\MyRealm.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\PartsServiceImpl.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\PermissionMapper.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\EmployeeServiceImpl.java

@@ -28,8 +28,8 @@ public class MyReamQuickStart {
         if(!subject.isAuthenticated()) {
             // 没有通过认证，则根据用户名密码进行登录
             UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken("admin", "123123");
-            // 5.通过login方法登录
             try {
+                // 5.通过login方法登录
                 subject.login(usernamePasswordToken);
                 System.out.println("isAuthenticated:" + subject.isAuthenticated());
 

@@ -42,7 +42,6 @@ public class PartsController {
         params.put("partsName", partsName);
         params.put("partsType", partsType);
 
-
         // 根据传进的P值来跳转分页, 获得页面所有信息(拦截)
         PageInfo<Parts> page = partsService.findListByPage(pageNo, params);
         // 查询所有类型,用于下拉选择框

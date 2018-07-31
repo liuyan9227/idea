@@ -119,7 +119,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 根据员工ID查询员工的信息和员工的角色列表
-     *
      * @param id
      * @return
      */
@@ -133,7 +132,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 回显员工信息
-     *
      * @param id
      * @return
      */
@@ -141,5 +139,32 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee findEmployee(Integer id) {
         Employee employee = employeeMapper.selectByPrimaryKey(id);
         return employee;
+    }
+
+    /**
+     * 根据Tel查找对象
+     * @return
+     */
+    @Override
+    public Employee findEmployeeByTel(String userTel) {
+        EmployeeExample employeeExample = new EmployeeExample();
+        employeeExample.createCriteria().andEmployeeTelEqualTo(userTel);
+        List<Employee> employeeList = employeeMapper.selectByExample(employeeExample);
+
+        // 返回Employee对象
+        if(employeeList != null && employeeList.size() > 0){
+            Employee employee = employeeList.get(0);
+            return employee;
+        }
+        return null;
+    }
+
+    /**
+     * 保存记录日志
+     * @param employeeLoginLog
+     */
+    @Override
+    public void saveLoginLog(EmployeeLoginLog employeeLoginLog) {
+        employeeLoginLogMapper.insertSelective(employeeLoginLog);
     }
 }
