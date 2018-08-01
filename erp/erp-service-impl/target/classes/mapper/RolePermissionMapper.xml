@@ -142,7 +142,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="findPermissionByRoleId" resultType="com.kaishengit.erp.entity.Permission">
+      select * from permission
+      where permission.id
+      in (
+      select permission_id from role_permission
+      where role_id = #{id}
+      )
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update role_permission
     <set>
       <if test="record.id != null">

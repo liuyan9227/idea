@@ -1,5 +1,6 @@
 package com.kaishengit.erp.mapper;
 
+import com.kaishengit.erp.entity.Permission;
 import com.kaishengit.erp.entity.RolePermission;
 import com.kaishengit.erp.entity.RolePermissionExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface RolePermissionMapper {
     int updateByPrimaryKeySelective(RolePermission record);
 
     int updateByPrimaryKey(RolePermission record);
+
+    List<Permission> findPermissionByRoleId(Integer id);
 }

@@ -79,4 +79,37 @@ public interface RolePermissionService {
      * @return
      */
     List<Role> findRoleByEmployeeId(Integer id);
+
+    /**
+     * 根据roleId(角色)查找PermissionList(权限)
+     * @param id 角色的ID值
+     * @return 权限列表
+     */
+    List<Permission> findPermissionByRoleId(Integer id);
+
+    /**
+     * 新增权限
+     * @param permission
+     */
+    void savePermission(Permission permission);
+
+    /**
+     * 根据PermissionId查找Permission对象
+     * @param id
+     * @return
+     */
+    Permission findPermissionById(Integer id);
+
+    /**
+     * 修改permission
+     * @param permission
+     */
+    void updetePermission(Permission permission);
+
+    /**
+     * 权限复选框回显,不能回显自己以及子类的权限
+     * @param id
+     * @return
+     */
+    List<Permission> findPermissionPid(Integer id);
 }

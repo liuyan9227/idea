@@ -4,6 +4,7 @@ D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\Employ
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\RoleMapper.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\RolePermissionServiceImpl.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\TypeServiceImpl.java
+D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\shiro\CustomerFilterChainDefinition.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\CustomerMapper.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\shiro\MyRealm.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\PartsServiceImpl.java

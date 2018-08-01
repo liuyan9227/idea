@@ -1,6 +1,7 @@
 com\kaishengit\erp\controller\PartsController.class
 com\kaishengit\erp\controller\TypeController.class
 com\kaishengit\erp\controller\EmployeeController.class
+com\kaishengit\erp\controller\PermissionController.class
 com\kaishengit\erp\controller\CustomerController.class
 com\kaishengit\erp\controller\exceptionHandler\ControllerExceptionHandler.class
 com\kaishengit\erp\controller\RoleController.class

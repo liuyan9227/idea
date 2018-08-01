@@ -25,7 +25,14 @@
 
     <!-- 文件上传解析器 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置文件上传最大的字节数 -->
         <property name="maxUploadSize" value="5242880"/>
     </bean>
 
+    <!-- 开启基于shiro的注解 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
 </beans>

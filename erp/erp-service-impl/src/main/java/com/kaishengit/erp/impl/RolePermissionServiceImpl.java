@@ -1,5 +1,8 @@
 package com.kaishengit.erp.impl;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.kaishengit.erp.entity.*;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.mapper.*;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,10 +53,38 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public List<Permission> findPermissionAll() {
+        // 创建一个新的List集合用于存放递归后的权限信息
+        List<Permission> endList = new ArrayList<>();
+
+        // TODO 没写完
         PermissionExample permissionExample = new PermissionExample();
+        // 存在的是乱序的permission的集合
         List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
-        return permissionList;
+        // 本类中创建一个方法用于递归排列permission值(传入空集合,乱序集合,顶级Id)
+        treeList(permissionList, endList, 0);
+        return endList;
     }
+
+    /**
+     * 将查询数据库的角色列表转换为树形集合结果
+     * @param sourceList 数据库查询出的集合
+     * @param endList 转换结束的结果集合
+     * @param parentId 父ID
+     */
+    private void treeList(List<Permission> sourceList, List<Permission> endList, int parentId) {
+        List<Permission> tempList = Lists.newArrayList(Collections2.filter(sourceList, new Predicate<Permission>() {
+            @Override
+            public boolean apply(Permission permission) {
+                return permission.getPid().equals(parentId);
+            }
+        }));
+
+        for(Permission permission : tempList) {
+            endList.add(permission);
+            treeList(sourceList,endList,permission.getId());
+        }
+    }
+
 
     /**
      * 保存角色和权限信息
@@ -89,19 +121,20 @@ public class RolePermissionServiceImpl implements RolePermissionService {
             permissionExample.createCriteria().andPidEqualTo(id);
             List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
             // 判断此权限id是否有相同的权限pid,如果相同表示有子权限,则不能删除
-            if(permissionList == null && permissionList.size() == 0){
+            // 一定要看清楚判断方法,数组默认值为0,不可能又等于null又等于0,只能取反判断!!!
+            if(permissionList != null && permissionList.size() > 0){
+                throw new ServiceException("此权限下有子权限使用,不能删除");
+            } else {
                 // 查询此权限id是否被其他角色使用
                 RolePermissionExample rolePermissionExample = new RolePermissionExample();
                 rolePermissionExample.createCriteria().andPermissionIdEqualTo(id);
                 List<RolePermission> rolePermissionList = rolePermissionMapper.selectByExample(rolePermissionExample);
                 // 判断此类型id是否被其他使用
-                if(rolePermissionList == null && rolePermissionList.size() == 0){
-                    permissionMapper.deleteByPrimaryKey(id);
-                } else {
+                if(rolePermissionList != null && rolePermissionList.size() > 0){
                     throw new ServiceException("此权限有其他角色使用,不能删除");
+                } else {
+                    permissionMapper.deleteByPrimaryKey(id);
                 }
-            } else {
-                throw new ServiceException("此权限下有子权限使用,不能删除");
             }
         } else {
             throw new ServiceException("此类型不存在");
@@ -231,6 +264,75 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     public List<Role> findRoleByEmployeeId(Integer id) {
         List<Role> roleList = roleMapper.findRoleListByEmployeeId();
         return roleList;
+    }
+
+    /**
+     * 根据roleId(角色)查找PermissionList(权限)
+     * @param id 角色的ID值
+     * @return 权限列表
+     */
+    @Override
+    public List<Permission> findPermissionByRoleId(Integer id) {
+        List<Permission> permissionList = rolePermissionMapper.findPermissionByRoleId(id);
+        return permissionList;
+    }
+
+    /**
+     * 新增权限
+     *
+     * @param permission
+     */
+    @Override
+    public void savePermission(Permission permission) {
+        permissionMapper.insert(permission);
+    }
+
+    /**
+     * 根据PermissionId查找Permission对象
+     * @param id
+     * @return
+     */
+    @Override
+    public Permission findPermissionById(Integer id) {
+        Permission permission = permissionMapper.selectByPrimaryKey(id);
+        return permission;
+    }
+
+    /**
+     * 修改permission
+     *
+     * @param permission
+     */
+    @Override
+    public void updetePermission(Permission permission) {
+        permissionMapper.updateByPrimaryKeySelective(permission);
+    }
+
+    /**
+     * 权限复选框回显,不能回显自己以及子类的权限
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Permission> findPermissionPid(Integer id) {
+        // 查询所有权限
+        PermissionExample permissionExample = new PermissionExample();
+        List<Permission> permissionAll = permissionMapper.selectByExample(permissionExample);
+        System.out.println("----------所有权限:----------" + permissionAll);
+        // 查询此PermissionId的权限以及子权限
+        PermissionExample permissionPid = new PermissionExample();
+        permissionPid.or().andPidEqualTo(id);
+        permissionPid.or().andIdEqualTo(id);
+        List<Permission> permissionNo = permissionMapper.selectByExample(permissionPid);
+        System.out.println("=======禁止显示的权限=======" + permissionNo);
+        boolean flag = true;
+        for(Permission all : permissionAll){
+
+        }
+
+
+
+        return null;
     }
 
 

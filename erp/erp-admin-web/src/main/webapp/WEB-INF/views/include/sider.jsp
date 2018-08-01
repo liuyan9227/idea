@@ -83,7 +83,7 @@
             <!-- 部门员工管理 -->
             <li><a href="/account/home"><i class="fa fa-users"></i> <span>员工管理</span></a></li>
             <li><a href="/manage/role"><i class="fa fa-users"></i> <span>角色管理</span></a></li>
-            <li><a href="#"><i class="fa fa-users"></i> <span>权限管理</span></a></li>
+            <li><a href="/manage/permission"><i class="fa fa-users"></i> <span>权限管理</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->
