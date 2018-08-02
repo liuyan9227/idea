@@ -9,7 +9,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <collection property="roleList" ofType="com.kaishengit.erp.entity.Role">
-        <id column="id" property="id"/>
+        <id column="role.id" property="id"/>
         <result column="role_name" property="roleName"/>
         <result column="role_code" property="roleCode"/>
         <result column="create_time" property="createTime"/>
@@ -171,6 +171,15 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+  <select id="findAllEmployeeAndRoleList" resultMap="BaseResultMap">
+    select *
+    from employee
+    LEFT JOIN employee_role
+    on employee.id = employee_id
+    LEFT JOIN role
+    on role_id = role.id
+
   </select>
   <update id="updateByExampleSelective" parameterType="map">
     update employee

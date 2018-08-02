@@ -87,7 +87,7 @@
                                     <td>
                                         <a class="btn btn-warning btn-xs" href="javascript:;" title="禁用"><i class="fa fa-lock"></i></a>
                                         <a class="btn btn-primary btn-xs" href="/manage/employee/${employee.id}/edit"><i class="fa fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-xs delLink" href="javascript:;" title="删除"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-danger btn-xs delLink" href="javascript:;" rel="${employee.id}" title="删除"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -103,5 +103,29 @@
 <!-- ./wrapper -->
 
 <%@include file="../../include/js.jsp"%>
+
+<script>
+    $(function () {
+
+        $(".delLink").click(function() {
+            var id = $(this).attr("rel");
+            layer.confirm("确定要删除改权限么？",function(index) {
+                layer.close(index);
+                $.get("/manage/employee/" + id + "/del").done(function(res){
+                    if(res.state == "success") {
+                        layer.msg("删除成功", {icon:2, time:1000},function () {
+                            history.go(0);
+                        });
+                    } else {
+                        layer.msg(res.message, {icon:2, time:1000});
+                    }
+                }).error(function() {
+                    layer.msg("系统异常")
+                })
+            })
+        })
+
+    });
+</script>
 </body>
 </html>

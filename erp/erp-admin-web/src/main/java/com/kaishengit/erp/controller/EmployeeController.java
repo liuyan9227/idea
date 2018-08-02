@@ -2,6 +2,7 @@ package com.kaishengit.erp.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kaishengit.erp.dto.ResponseBean;
 import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.Role;
 import com.kaishengit.erp.exception.ServiceException;
@@ -18,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,7 +77,6 @@ public class EmployeeController {
             if(savedRequest != null){
                 // 从savedRequest对象中获取访问的路径,重新赋值给URL
                 url = savedRequest.getRequestUrl();
-                System.out.println("-------callback:--------" + url);
             }
             return "redirect:" + url;
         }catch (UnknownAccountException |IncorrectCredentialsException e) {
@@ -161,9 +158,23 @@ public class EmployeeController {
     }
 
     @PostMapping("/manage/employee/{id:\\d+}/edit")
-    public String editEmployeePost(Employee employee, Integer[] id){
-        employeeService.save(employee, id);
+    public String editEmployeePost(Employee employee, Integer[] roleIds){
+        System.out.println("-------------" + employee);
+        System.out.println("-------------" + roleIds);
+        employeeService.edit(employee, roleIds);
         return "redirect:/account/home";
+    }
+
+    @ResponseBody
+    @GetMapping("/manage/employee/{id:\\d+}/del")
+    public ResponseBean del(@PathVariable Integer id){
+        try {
+            // 删除员工需要删除员工的关联关系表
+            employeeService.del(id);
+            return ResponseBean.success();
+        } catch (ServiceException e){
+            return ResponseBean.error(e.getMessage());
+        }
     }
 
 

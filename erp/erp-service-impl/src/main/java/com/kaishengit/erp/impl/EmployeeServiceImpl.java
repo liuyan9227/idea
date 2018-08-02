@@ -1,9 +1,6 @@
 package com.kaishengit.erp.impl;
 
-import com.kaishengit.erp.entity.Employee;
-import com.kaishengit.erp.entity.EmployeeExample;
-import com.kaishengit.erp.entity.EmployeeLoginLog;
-import com.kaishengit.erp.entity.EmployeeRole;
+import com.kaishengit.erp.entity.*;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.mapper.EmployeeLoginLogMapper;
 import com.kaishengit.erp.mapper.EmployeeMapper;
@@ -90,9 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public List<Employee> findAll() {
-        EmployeeExample employeeExample = new EmployeeExample();
-        List<Employee> employeeList = employeeMapper.selectByExample(employeeExample);
-
+        List<Employee> employeeList = employeeMapper.findAllEmployeeAndRoleList();
         return employeeList;
     }
 
@@ -166,5 +161,39 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void saveLoginLog(EmployeeLoginLog employeeLoginLog) {
         employeeLoginLogMapper.insertSelective(employeeLoginLog);
+    }
+
+    /**
+     * 更新员工信息
+     *
+     * @param employee
+     * @param roleIds
+     */
+    @Override
+    public void edit(Employee employee, Integer[] roleIds) {
+        // 更新员工信息
+        employeeMapper.updateByPrimaryKeySelective(employee);
+        // 添加员工与角色的关联关系表
+        for(Integer roleId : roleIds){
+            EmployeeRole employeeRole = new EmployeeRole();
+            employeeRole.setEmployeeId(employee.getId());
+            employeeRole.setRoleId(roleId);
+            employeeRoleMapper.insert(employeeRole);
+        }
+    }
+
+    /**
+     * 删除员工信息,和所有的员工的关联关系表
+     *
+     * @param id
+     */
+    @Override
+    public void del(Integer id) {
+        // 根据id删除员工信息
+        employeeMapper.deleteByPrimaryKey(id);
+        // 根据员工删除此id的角色信息关联关系表
+        EmployeeRoleExample employeeRoleExample = new EmployeeRoleExample();
+        employeeRoleExample.createCriteria().andEmployeeIdEqualTo(id);
+        employeeRoleMapper.deleteByExample(employeeRoleExample);
     }
 }

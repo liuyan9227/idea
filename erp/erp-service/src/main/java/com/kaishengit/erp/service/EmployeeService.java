@@ -56,4 +56,17 @@ public interface EmployeeService {
      * @param employeeLoginLog
      */
     void saveLoginLog(EmployeeLoginLog employeeLoginLog);
+
+    /**
+     * 更新员工信息
+     * @param employee
+     * @param roleIds
+     */
+    void edit(Employee employee, Integer[] roleIds);
+
+    /**
+     * 删除员工信息,和所有的员工的关联关系表
+     * @param id
+     */
+    void del(Integer id);
 }

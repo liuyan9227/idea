@@ -107,9 +107,9 @@ public interface RolePermissionService {
     void updetePermission(Permission permission);
 
     /**
-     * 权限复选框回显,不能回显自己以及子类的权限
-     * @param id
+     * 根据类型查找Permission集合
+     * @param permissionTypeMenu
      * @return
      */
-    List<Permission> findPermissionPid(Integer id);
+    List<Permission> findPermissionTypeById(String permissionTypeMenu);
 }

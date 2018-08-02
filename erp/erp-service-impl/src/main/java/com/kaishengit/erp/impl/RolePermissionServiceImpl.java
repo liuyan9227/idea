@@ -309,30 +309,16 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     }
 
     /**
-     * 权限复选框回显,不能回显自己以及子类的权限
-     * @param id
+     * 根据类型查找Permission集合
+     * @param permissionTypeMenu
      * @return
      */
     @Override
-    public List<Permission> findPermissionPid(Integer id) {
-        // 查询所有权限
+    public List<Permission> findPermissionTypeById(String permissionTypeMenu) {
         PermissionExample permissionExample = new PermissionExample();
-        List<Permission> permissionAll = permissionMapper.selectByExample(permissionExample);
-        System.out.println("----------所有权限:----------" + permissionAll);
-        // 查询此PermissionId的权限以及子权限
-        PermissionExample permissionPid = new PermissionExample();
-        permissionPid.or().andPidEqualTo(id);
-        permissionPid.or().andIdEqualTo(id);
-        List<Permission> permissionNo = permissionMapper.selectByExample(permissionPid);
-        System.out.println("=======禁止显示的权限=======" + permissionNo);
-        boolean flag = true;
-        for(Permission all : permissionAll){
-
-        }
-
-
-
-        return null;
+        permissionExample.createCriteria().andPermissionTypeEqualTo(permissionTypeMenu);
+        List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
+        return permissionList;
     }
 
 
