@@ -2,9 +2,8 @@ package com.kaishengit.erp.mapper;
 
 import com.kaishengit.erp.entity.Customer;
 import com.kaishengit.erp.entity.CustomerExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface CustomerMapper {
     long countByExample(CustomerExample example);

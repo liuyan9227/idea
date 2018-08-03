@@ -1,8 +1,5 @@
-com\kaishengit\erp\shiro\CustomerFilterChainDefinition.class
-com\kaishengit\erp\impl\CustomerServiceImpl.class
 com\kaishengit\erp\mapper\TypeMapper.class
 com\kaishengit\erp\impl\PartsServiceImpl.class
-com\kaishengit\erp\shiro\MyRealm.class
 com\kaishengit\erp\mapper\PermissionMapper.class
 com\kaishengit\erp\mapper\RolePermissionMapper.class
 com\kaishengit\erp\impl\EmployeeServiceImpl.class

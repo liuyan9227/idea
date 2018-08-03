@@ -1,7 +1,6 @@
 package com.kaishengit.erp.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author 

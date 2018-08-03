@@ -7,8 +7,8 @@ import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.Role;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.service.EmployeeService;
-import com.kaishengit.erp.service.RolePermissionService;
 import com.kaishengit.erp.utils.Constant;
+import com.kaishengit.erp.service.RolePermissionService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
@@ -16,15 +16,12 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -42,7 +39,7 @@ public class EmployeeController {
 
 
     @GetMapping("/")
-    public String Login(){
+    public String login(){
         Subject subject = SecurityUtils.getSubject();
         // 判断是否通过认证,通过认证则退出登录(项目要求登录页需要重新登录)
         if(subject.isAuthenticated()){

@@ -19,6 +19,14 @@ public class ResponseBean {
         return responseBean;
     }
 
+    public static ResponseBean success(Object data){
+        ResponseBean responseBean = new ResponseBean();
+        responseBean.setState(RESPONSEBEAN_STATE_SUCCESS);
+        // 发生错误时向前端传输的数据
+        responseBean.setData(data);
+        return responseBean;
+    }
+
     public static ResponseBean error(String message){
         ResponseBean responseBean = new ResponseBean();
         responseBean.setState(RESPONSEBEAN_STATE_ERROR);
@@ -26,17 +34,6 @@ public class ResponseBean {
         responseBean.setMessage(message);
         return responseBean;
     }
-
-    public static ResponseBean error(Object data){
-        ResponseBean responseBean = new ResponseBean();
-        responseBean.setState(RESPONSEBEAN_STATE_ERROR);
-        // 发生错误时向前端传输的数据
-        responseBean.setData(data);
-        return responseBean;
-    }
-
-
-
 
     public String getState() {
         return state;

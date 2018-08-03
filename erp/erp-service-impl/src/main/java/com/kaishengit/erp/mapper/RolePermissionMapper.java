@@ -3,7 +3,9 @@ package com.kaishengit.erp.mapper;
 import com.kaishengit.erp.entity.Permission;
 import com.kaishengit.erp.entity.RolePermission;
 import com.kaishengit.erp.entity.RolePermissionExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RolePermissionMapper {

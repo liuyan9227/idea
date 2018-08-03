@@ -2,7 +2,9 @@ package com.kaishengit.erp.mapper;
 
 import com.kaishengit.erp.entity.Role;
 import com.kaishengit.erp.entity.RoleExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
