@@ -66,7 +66,10 @@ public class CarServiceImpl implements CarService {
         if(StringUtils.isEmpty(licenseNo)){
             throw new ServiceException("参数异常");
         }
+        // 如果报异常可能是输数据库被重复提交表单,存在多个车牌号相同的对象
         Car car = carMapper.findCarAndCustomerByLicenseNo(licenseNo);
         return car;
     }
+
+
 }
