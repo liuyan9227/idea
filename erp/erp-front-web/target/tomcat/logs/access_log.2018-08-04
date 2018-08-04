@@ -1,0 +1,9 @@
+192.168.1.120 - - [04/Aug/2018:10:59:17 +0800] "GET /car/new HTTP/1.1" 302 - http-bio-8081-exec-1 203
+192.168.1.120 - - [04/Aug/2018:10:59:19 +0800] "GET / HTTP/1.1" 200 3035 http-bio-8081-exec-3 2838
+192.168.1.120 - - [04/Aug/2018:10:59:25 +0800] "POST / HTTP/1.1" 302 - http-bio-8081-exec-4 229
+192.168.1.120 - - [04/Aug/2018:10:59:26 +0800] "GET /car/new HTTP/1.1" 200 22058 http-bio-8081-exec-6 1300
+192.168.1.120 - - [04/Aug/2018:10:59:27 +0800] "GET /order/parts/types HTTP/1.1" 200 329 http-bio-8081-exec-5 375
+192.168.1.120 - - [04/Aug/2018:10:59:27 +0800] "GET /order/service/types HTTP/1.1" 200 432 http-bio-8081-exec-7 379
+192.168.1.120 - - [04/Aug/2018:10:59:29 +0800] "GET /car/check?licenceNo=%E8%B1%ABHly666 HTTP/1.1" 200 281 http-bio-8081-exec-10 37
+192.168.1.120 - - [04/Aug/2018:10:59:32 +0800] "GET /order/1003/parts HTTP/1.1" 200 578 http-bio-8081-exec-10 65
+192.168.1.120 - - [04/Aug/2018:10:59:35 +0800] "POST /order/new HTTP/1.1" 200 57 http-bio-8081-exec-10 32

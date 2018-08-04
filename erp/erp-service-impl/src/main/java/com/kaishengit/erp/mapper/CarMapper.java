@@ -28,5 +28,5 @@ public interface CarMapper {
 
     int updateByPrimaryKey(Car record);
 
-    Car findCarAndCustomerByLicenseNo( String licenseNo);
+    Car findCarAndCustomerByLicenseNo( String licenceNo);
 }

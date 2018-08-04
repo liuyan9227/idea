@@ -1,9 +1,0 @@
-192.168.0.101 - - [02/Aug/2018:23:46:37 +0800] "GET /car/new HTTP/1.1" 302 - http-bio-8081-exec-1 252
-192.168.0.101 - - [02/Aug/2018:23:46:41 +0800] "GET / HTTP/1.1" 200 3035 http-bio-8081-exec-2 3454
-192.168.0.101 - - [02/Aug/2018:23:46:48 +0800] "POST / HTTP/1.1" 302 - http-bio-8081-exec-3 311
-192.168.0.101 - - [02/Aug/2018:23:46:50 +0800] "GET /car/new HTTP/1.1" 200 16564 http-bio-8081-exec-4 1908
-192.168.0.101 - - [02/Aug/2018:23:46:56 +0800] "GET /car/check?licenseNo=%E8%B1%ABHly666 HTTP/1.1" 500 14042 http-bio-8081-exec-5 50
-192.168.0.101 - - [02/Aug/2018:23:49:10 +0800] "GET /car/new HTTP/1.1" 200 16564 http-bio-8081-exec-6 66
-192.168.0.101 - - [02/Aug/2018:23:49:13 +0800] "GET /car/check?licenseNo=%E8%B1%ABHly666 HTTP/1.1" 200 281 http-bio-8081-exec-7 186
-192.168.0.101 - - [02/Aug/2018:23:49:18 +0800] "GET /car/check?licenseNo=%E8%B1%ABHly666 HTTP/1.1" 200 281 http-bio-8081-exec-9 18
-192.168.0.101 - - [02/Aug/2018:23:49:19 +0800] "GET /car/check?licenseNo=%E8%B1%ABHly666 HTTP/1.1" 200 281 http-bio-8081-exec-10 19

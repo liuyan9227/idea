@@ -1,6 +1,7 @@
 com\kaishengit\erp\controller\CarController.class
 com\kaishengit\erp\controller\HomeController.class
 com\kaishengit\erp\shiro\CustomerFilterChainDefinition.class
+com\kaishengit\erp\controller\OrderController.class
 com\kaishengit\erp\controller\exception\ControllerExceptionHandler.class
 com\kaishengit\erp\controller\exception\NotFoundException.class
 com\kaishengit\erp\shiro\MyRealm.class

@@ -1,7 +1,6 @@
 package com.kaishengit.erp.impl;
 
 import com.kaishengit.erp.entity.Car;
-import com.kaishengit.erp.entity.CarExample;
 import com.kaishengit.erp.entity.Customer;
 import com.kaishengit.erp.entity.CustomerExample;
 import com.kaishengit.erp.exception.ServiceException;
@@ -58,16 +57,16 @@ public class CarServiceImpl implements CarService {
 
     /**
      * 查询(车辆信息,车主信息)根据(车牌号)
-     * @param licenseNo 车牌号(唯一)
+     * @param licenceNo 车牌号(唯一)
      * @return car车辆对象
      */
     @Override
-    public Car findCarByLicenseNo(String licenseNo) {
-        if(StringUtils.isEmpty(licenseNo)){
+    public Car findCarByLicenseNo(String licenceNo) {
+        if(StringUtils.isEmpty(licenceNo)){
             throw new ServiceException("参数异常");
         }
         // 如果报异常可能是输数据库被重复提交表单,存在多个车牌号相同的对象
-        Car car = carMapper.findCarAndCustomerByLicenseNo(licenseNo);
+        Car car = carMapper.findCarAndCustomerByLicenseNo(licenceNo);
         return car;
     }
 

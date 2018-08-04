@@ -19,8 +19,8 @@ public interface CarService {
 
     /**
      * 查询(车辆信息,车主信息)根据(车牌号)
-     * @param licenseNo 车牌号(唯一)
+     * @param licenceNo 车牌号(唯一)
      * @return car车辆对象
      */
-    Car findCarByLicenseNo(String licenseNo);
+    Car findCarByLicenseNo(String licenceNo);
 }

@@ -11,7 +11,7 @@
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <association property="type" javaType="com.kaishengit.erp.entity.Type">
-      <id column="id" property="id"/>
+      <id column="type_id" property="id"/>
       <result column="type_Name" property="typeName"/>
     </association>
   </resultMap>
@@ -296,4 +296,10 @@
       </if>
     </where>
   </select>
+    <select id="findAllPartsAndType" resultMap="BaseResultMap">
+      SELECT parts.*, type.type_name
+      from parts
+      LEFT JOIN type
+      ON parts.type_id = type.id
+    </select>
 </mapper>

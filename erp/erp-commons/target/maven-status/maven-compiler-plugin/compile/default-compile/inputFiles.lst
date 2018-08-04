@@ -1,12 +1,14 @@
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\exception\ServiceException.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Type.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeRole.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\ServiceTypeExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeLoginLog.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Role.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\CarExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\utils\Constant.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Permission.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\ServiceType.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Car.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Employee.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeLoginLogExample.java

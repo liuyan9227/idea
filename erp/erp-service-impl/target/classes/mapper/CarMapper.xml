@@ -184,7 +184,7 @@
       from car
       LEFT join customer
       on car.customer_id = customer.id
-      where car.licence_no = #{licenseNo}
+      where car.licence_no = #{licenceNo}
     </select>
     <update id="updateByExampleSelective" parameterType="map">
     update car

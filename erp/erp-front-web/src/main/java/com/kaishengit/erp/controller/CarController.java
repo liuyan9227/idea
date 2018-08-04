@@ -41,15 +41,17 @@ public class CarController {
 
     @ResponseBody
     @GetMapping("/check")
-    public ResponseBean findCar(String licenseNo){
+    public ResponseBean findCar(String licenceNo){
         // 查询此车牌号是否存在
-        Car car = carService.findCarByLicenseNo(licenseNo);
+        Car car = carService.findCarByLicenseNo(licenceNo);
         if(car != null){
             return ResponseBean.success(car);
         } else {
             return ResponseBean.error("未找到此车辆");
         }
     }
+
+
 
 
 }

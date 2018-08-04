@@ -35,4 +35,6 @@ public interface PartsMapper {
     List<Parts> findListPage(Map params);
 
     List<Parts> findlistPageLike(PartsExample partsExample);
+
+    List<Parts> findAllPartsAndType();
 }
