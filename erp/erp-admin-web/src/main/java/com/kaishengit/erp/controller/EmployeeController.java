@@ -6,6 +6,7 @@ import com.kaishengit.erp.dto.ResponseBean;
 import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.Role;
 import com.kaishengit.erp.exception.ServiceException;
+import com.kaishengit.erp.mapper.EmployeeMapper;
 import com.kaishengit.erp.service.EmployeeService;
 import com.kaishengit.erp.utils.Constant;
 import com.kaishengit.erp.service.RolePermissionService;
@@ -22,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liuyan
@@ -112,15 +115,33 @@ public class EmployeeController {
         }
     }*/
 
+    /**
+     * 员工信息主页面,搜索功能在本野种使用,采用(电话和帐号混输)和根据(角色信息)联合查找
+     * 自写sql语句,采用模糊查询,使用if标签
+     */
     @GetMapping("/account/home")
-    public String home(@RequestParam(defaultValue = "1", required = false) Integer p, Model model){
-        // 分页插件
+    public String home(@RequestParam(defaultValue = "1", required = false) Integer p,
+                       @RequestParam(required = false) Integer nameMobile,
+                       @RequestParam(required = false) Role role,
+                       Model model){
+        System.out.println("-------------" + nameMobile);
+        System.out.println("=============" + role);
+        // 分页插件(是否应该在service层处理信息???)
         PageHelper.startPage(p, Constant.DEFAULT_PAGE_SIZE);
-        // 查找所有的员工信息
+        // 将所有信息保存在Map集合中,用于传值
+        Map<String, Object> params = new HashMap<>();
+        params.put("nameMobile", nameMobile);
+        params.put("role", role);
+        // 将所有符合条件的员工信息展示在页面(搜索框中可能会输入查询条件)
+        List<Employee> employeeList = employeeService.findEmployeeByLike(p, params);
+        System.out.println("获得到的员工信息" + employeeList);
+
+
+        /*// 查找所有的员工信息
         List<Employee> employeeList = employeeService.findAll();
         // 将List<employee>对象转换为PageInfo<Employee>对象, 本质还是一个List集合
         PageInfo<Employee> page = new PageInfo<>(employeeList);
-
+*/
         model.addAttribute("employeeList", employeeList);
         return "manage/account/home";
     }

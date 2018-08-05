@@ -289,6 +289,7 @@
                 for(var i = 0; i < this.choosePartsList.length; i++) {
                     if(this.chooseParts == this.choosePartsList[i]) {
                         addFlag = true;
+
                         this.choosePartsList[i].num = this.choosePartsList[i].num + 1;
                         break;
                     }
@@ -359,6 +360,7 @@
                     },
                     success: function(json){
                         if(json.state == "success") {
+                            $.get("/order/list")
                         }
                     }
                 });

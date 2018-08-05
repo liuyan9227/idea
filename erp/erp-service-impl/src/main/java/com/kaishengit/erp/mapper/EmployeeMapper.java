@@ -4,6 +4,7 @@ import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.EmployeeExample;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -31,4 +32,6 @@ public interface EmployeeMapper {
     int updateByPrimaryKey(Employee record);
 
     List<Employee> findAllEmployeeAndRoleList();
+
+    List<Employee> findEmployeeByLike(Map<String,Object> params);
 }

@@ -1,8 +1,10 @@
 package com.kaishengit.erp.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.kaishengit.erp.entity.Order;
 import com.kaishengit.erp.entity.OrderExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderMapper {
@@ -27,4 +29,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<Order> findOrderAndCustomerAndCarWithLike(Map<String,Object> params);
 }

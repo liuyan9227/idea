@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +24,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                服务订单查询
+                订单查询
             </h1>
         </section>
 
@@ -32,10 +34,10 @@
             <div class="box no-border">
                 <div class="box-body">
                     <form class="form-inline">
-                        <input type="text" name="carVIN" placeholder="车牌号码" class="form-control">
-                        <input type="text" name="ownerId" placeholder="车主手机号码" class="form-control">
-                        <input type="hidden" name="startTime" id="startTime">
-                        <input type="hidden" name="endTime" id="endTime">
+                        <input type="text" name="licenceNo" placeholder="车牌号码" class="form-control" value="${param.licenceNo}">
+                        <input type="text" name="tel" placeholder="车主手机号码" class="form-control"  value="${param.tel}">
+                        <input type="hidden" name="startTime" id="startTime"  value="${param.startTime}">
+                        <input type="hidden" name="endTime" id="endTime"  value="${param.endTime}">
                         <input type="text" class="form-control" id="time" placeholder="下单日期选择">
                         <button class="btn btn-default">搜索</button>
                     </form>
@@ -46,8 +48,8 @@
             <div class="box">
                 <div class="box-body">
                     <ul class="nav nav-tabs">
-                        <li id="undone" class="${type == 'pay' ? '' : 'active'}"><a href=""  data-toggle='tab'>未完成订单</a></li>
-                        <li id="history" class="${type == 'pay' ? 'active' : ''}"><a href="" data-toggle='tab'>已完成订单</a></li>
+                        <li id="undone" class="${type == 'done' ? '' : 'active'}"><a href="/order/undone/list">未完成订单</a></li>
+                        <li id="done" class="${type == 'done' ? 'active' : ''}"><a href="/order/done/list">已完成订单</a></li>
                     </ul>
                     <table class="table">
                         <thead>
@@ -56,40 +58,36 @@
                             <th>车主姓名</th>
                             <th>车主电话</th>
                             <th>车型</th>
+                            <th>车牌号码</th>
                             <th>状态</th>
                             <th>订单金额</th>
+                            <th>日期</th>
                             <th>#</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>100198763</td>
-                            <td>王富贵</td>
-                            <td>15937911234</td>
-                            <td>奔驰S600</td>
-                            <td>已完成</td>
-                            <td>1200</td>
-                            <td><a href="#" class="label label-primary">详情</a></td>
-                        </tr>
-                        <tr>
-                            <td>100198763</td>
-                            <td>王富贵</td>
-                            <td>15937911234</td>
-                            <td>奔驰S600</td>
-                            <td>已完成</td>
-                            <td>1200</td>
-                            <td><a href="#" class="label label-primary">详情</a></td>
-                        </tr>
+                        <c:forEach items="${page.list}" var="order">
+                            <tr>
+                                <td>${order.id}</td>
+                                <td>${order.customer.userName}</td>
+                                <td>${order.customer.tel}</td>
+                                <td>${order.car.carType}</td>
+                                <td>${order.car.licenceNo}</td>
+                                <td>${order.stateName}</td>
+                                <td>${order.orderMoney}</td>
+                                <td><fmt:formatDate value="${order.createTime}" pattern="yyyy-MM-dd"/></td>
+                                <td><a href="/order/${order.id}/detail" class="label label-primary">详情</a></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <ul id="pagination" class="pagination pull-right"></ul>
                 </div>
                 <!-- /.box-body -->
-
+                <!-- /.box -->
             </div>
-            <!-- /.box -->
-
         </section>
+
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -101,14 +99,21 @@
 <%@ include file="../include/js.jsp" %>
 <script>
     $(function(){
+        var startDate = "${param.startTime}";
+        var endDate = "${param.endTime}";
+
+        if(startDate && endDate) {
+            $('#time').val(startDate + " / " + endDate);
+        }
+
         $("#pagination").twbsPagination({
-            totalPages : 5,
+            totalPages : ${page.pages},
             visiblePages : 7,
             first : '首页',
             last:'末页',
             prev:'上一页',
             next:'下一页',
-            href:"#"
+            href:"/order/undone/list?p={{number}}&startTime=" + startDate + "&endTime=" + endDate + "&licenceNo=" + encodeURIComponent('${param.licenceNo}') + "&tel=${param.tel}"
         });
 
         var locale = {
@@ -124,13 +129,6 @@
             "monthNames": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
             "firstDay": 1
         };
-
-        var startDate = "";
-        var endDate = "";
-
-        if(startDate && endDate) {
-            $('#time').val(startDate + " / " + endDate);
-        }
 
 
         $('#time').daterangepicker({

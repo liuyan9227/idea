@@ -181,7 +181,24 @@
     on role_id = role.id
 
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="findEmployeeByLike" resultMap="BaseResultMap">
+      select role.*,employee_name,employee_tel,employee.password,state,employee_role.employee_id,employee_role.role_id
+      from role
+      left join employee_role
+      on role.id = employee_role.role_id
+      left join employee
+      on employee_role.employee_id = employee.id
+      <where>
+        <if test="role != null and role != ''">
+          and role_name like ("%",#{role},"%")
+        </if>
+        <if test="nameMobile != null and nameMobile != ''">
+          and employee_tel like ("%",#{nameMobile},"%")
+        </if>
+      </where>
+
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update employee
     <set>
       <if test="record.id != null">

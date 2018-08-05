@@ -436,63 +436,63 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeIsNull() {
-            addCriterion("hour_fee is null");
+        public Criteria andServiceTypeIdIsNull() {
+            addCriterion("service_type_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeIsNotNull() {
-            addCriterion("hour_fee is not null");
+        public Criteria andServiceTypeIdIsNotNull() {
+            addCriterion("service_type_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeEqualTo(Long value) {
-            addCriterion("hour_fee =", value, "hourFee");
+        public Criteria andServiceTypeIdEqualTo(Integer value) {
+            addCriterion("service_type_id =", value, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeNotEqualTo(Long value) {
-            addCriterion("hour_fee <>", value, "hourFee");
+        public Criteria andServiceTypeIdNotEqualTo(Integer value) {
+            addCriterion("service_type_id <>", value, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeGreaterThan(Long value) {
-            addCriterion("hour_fee >", value, "hourFee");
+        public Criteria andServiceTypeIdGreaterThan(Integer value) {
+            addCriterion("service_type_id >", value, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeGreaterThanOrEqualTo(Long value) {
-            addCriterion("hour_fee >=", value, "hourFee");
+        public Criteria andServiceTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("service_type_id >=", value, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeLessThan(Long value) {
-            addCriterion("hour_fee <", value, "hourFee");
+        public Criteria andServiceTypeIdLessThan(Integer value) {
+            addCriterion("service_type_id <", value, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeLessThanOrEqualTo(Long value) {
-            addCriterion("hour_fee <=", value, "hourFee");
+        public Criteria andServiceTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("service_type_id <=", value, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeIn(List<Long> values) {
-            addCriterion("hour_fee in", values, "hourFee");
+        public Criteria andServiceTypeIdIn(List<Integer> values) {
+            addCriterion("service_type_id in", values, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeNotIn(List<Long> values) {
-            addCriterion("hour_fee not in", values, "hourFee");
+        public Criteria andServiceTypeIdNotIn(List<Integer> values) {
+            addCriterion("service_type_id not in", values, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeBetween(Long value1, Long value2) {
-            addCriterion("hour_fee between", value1, value2, "hourFee");
+        public Criteria andServiceTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("service_type_id between", value1, value2, "serviceTypeId");
             return (Criteria) this;
         }
 
-        public Criteria andHourFeeNotBetween(Long value1, Long value2) {
-            addCriterion("hour_fee not between", value1, value2, "hourFee");
+        public Criteria andServiceTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("service_type_id not between", value1, value2, "serviceTypeId");
             return (Criteria) this;
         }
     }

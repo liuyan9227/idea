@@ -4,6 +4,7 @@ com\kaishengit\erp\mapper\PermissionMapper.class
 com\kaishengit\erp\mapper\RolePermissionMapper.class
 com\kaishengit\erp\impl\EmployeeServiceImpl.class
 com\kaishengit\erp\impl\RolePermissionServiceImpl$1.class
+com\kaishengit\erp\impl\OrderServiceImpl.class
 com\kaishengit\erp\mapper\RoleMapper.class
 com\kaishengit\erp\mapper\EmployeeMapper.class
 com\kaishengit\erp\impl\TypeServiceImpl.class

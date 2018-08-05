@@ -1,6 +1,10 @@
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\exception\ServiceException.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\vo\OrderVo.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Type.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderEmployee.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeRole.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderPartsExample.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\vo\PartsVo.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\ServiceTypeExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeLoginLog.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Role.java
@@ -23,5 +27,7 @@ D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeRol
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\TypeExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\dto\ResponseBean.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\PermissionExample.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderParts.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Order.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderEmployeeExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\RolePermissionExample.java

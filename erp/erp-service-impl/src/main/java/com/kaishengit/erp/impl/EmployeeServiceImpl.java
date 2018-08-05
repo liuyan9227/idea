@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author liuyan
@@ -195,5 +196,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         EmployeeRoleExample employeeRoleExample = new EmployeeRoleExample();
         employeeRoleExample.createCriteria().andEmployeeIdEqualTo(id);
         employeeRoleMapper.deleteByExample(employeeRoleExample);
+    }
+
+    /**
+     * 查询符合查询条件的员工信息(电话,帐号或者角色类型)
+     * @param p      分页起始页
+     * @param params 需要查询满足的条件(当前Map集合中有的元素: nameMobile, role)
+     * @return 返回符合模糊查询的员工信息
+     */
+    @Override
+    public List<Employee> findEmployeeByLike(Integer p, Map<String, Object> params) {
+        Integer num = (Integer) params.get("nameMobile");
+        Role role = (Role) params.get("role");
+        // 模糊查询根据件
+        List<Employee> employeeList = employeeMapper.findEmployeeByLike(params);
+
+
+        return employeeList;
     }
 }
