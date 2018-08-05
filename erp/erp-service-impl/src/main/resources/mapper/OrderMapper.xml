@@ -10,8 +10,19 @@
     <result column="service_type_id" jdbcType="INTEGER" property="serviceTypeId" />
   </resultMap>
 
-  <resultMap id="BaseResultMap" type="com.kaishengit.erp.entity.Order">
-    <
+  <resultMap id="orderWhitData" type="com.kaishengit.erp.entity.Order" extends="BaseResultMap">
+    <association property="car" javaType="com.kaishengit.erp.entity.Car" column="car_id">
+      <id property="id" column="car_id"/>
+      <result property="carNo" column="car_no"/>
+      <result property="carType" column="car_type"/>
+      <result property="licenceNo" column="licence_no"/>
+    </association>
+    <association property="customer" javaType="com.kaishengit.erp.entity.Customer" column="customer_id">
+      <id property="id" column="customer_id"/>
+      <result property="userName" column="user_name"/>
+      <result property="idCard" column="id_card"/>
+      <result property="tel" column="tel"/>
+    </association>
   </resultMap>
 
 
@@ -171,7 +182,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="findOrderAndCustomerAndCarWithLike" resultMap="BaseResultMap">
+    <select id="findOrderAndCustomerAndCarWithLike" resultMap="orderWhitData">
       SELECT `order`.*, car.car_type, car.licence_no, customer.user_name, customer.tel
       from `order`
       LEFT JOIN car
