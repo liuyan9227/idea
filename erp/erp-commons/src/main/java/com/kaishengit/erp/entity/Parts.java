@@ -52,6 +52,32 @@ public class Parts implements Serializable {
      */
     private Type type;
 
+    /**
+     * 订单与部件关系表
+     */
+    private OrderParts orderParts;
+
+    /**
+     * 数量
+     */
+    private Integer num;
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    public OrderParts getOrderParts() {
+        return orderParts;
+    }
+
+    public void setOrderParts(OrderParts orderParts) {
+        this.orderParts = orderParts;
+    }
+
     public Type getType() {
         return type;
     }
@@ -175,6 +201,8 @@ public class Parts implements Serializable {
                 ", typeId=" + typeId +
                 ", address='" + address + '\'' +
                 ", type=" + type +
+                ", orderParts=" + orderParts +
+                ", num=" + num +
                 '}';
     }
 }

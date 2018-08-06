@@ -10,9 +10,16 @@
     <result column="inventory" jdbcType="INTEGER" property="inventory" />
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="num" property="num"/>
     <association property="type" javaType="com.kaishengit.erp.entity.Type">
       <id column="type_id" property="id"/>
       <result column="type_Name" property="typeName"/>
+    </association>
+    <association property="orderParts" javaType="com.kaishengit.erp.entity.OrderParts">
+      <id property="id" column="orderParts.id"/>
+      <result property="orderId" column="order_id"/>
+      <result property="partsId" column="parts_id"/>
+      <result property="num" column="num"/>
     </association>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -301,5 +308,12 @@
       from parts
       LEFT JOIN type
       ON parts.type_id = type.id
+    </select>
+    <select id="findPartsListByOrderId" resultMap="BaseResultMap">
+      SELECT *
+      from order_parts
+      LEFT JOIN parts
+      on order_parts.parts_id = parts.id
+      where order_parts.order_id = #{id}
     </select>
 </mapper>

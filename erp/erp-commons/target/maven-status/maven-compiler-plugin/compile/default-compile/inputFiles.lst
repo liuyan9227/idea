@@ -14,8 +14,10 @@ D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderExampl
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Permission.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\ServiceType.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Car.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderStateExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Employee.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeLoginLogExample.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\vo\OrderInfoVo.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\PartsExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\RoleExample.java
@@ -23,6 +25,7 @@ D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\RolePermiss
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\CustomerExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Parts.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\Customer.java
+D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\OrderState.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\EmployeeRoleExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\entity\TypeExample.java
 D:\java\idea\erp\erp-commons\src\main\java\com\kaishengit\erp\dto\ResponseBean.java

@@ -35,6 +35,58 @@ public class Order implements Serializable {
      */
     private Integer serviceTypeId;
 
+    /**
+     * 状态名称
+     */
+    private String stateName;
+
+    /**
+     * 车辆信息
+     */
+    private Car car;
+
+    /**
+     * 客户信息
+     */
+    private Customer customer;
+
+    /**
+     * 状态名称
+     */
+    private OrderState orderState;
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -120,18 +172,17 @@ public class Order implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", orderMoney=").append(orderMoney);
-        sb.append(", state=").append(state);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", carId=").append(carId);
-        sb.append(", serviceTypeId=").append(serviceTypeId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Order{" +
+                "id=" + id +
+                ", orderMoney=" + orderMoney +
+                ", state='" + state + '\'' +
+                ", createTime=" + createTime +
+                ", carId=" + carId +
+                ", serviceTypeId=" + serviceTypeId +
+                ", stateName='" + stateName + '\'' +
+                ", car=" + car +
+                ", customer=" + customer +
+                ", orderState=" + orderState +
+                '}';
     }
 }

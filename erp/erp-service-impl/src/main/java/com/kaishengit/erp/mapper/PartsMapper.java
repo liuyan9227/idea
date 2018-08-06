@@ -37,4 +37,6 @@ public interface PartsMapper {
     List<Parts> findlistPageLike(PartsExample partsExample);
 
     List<Parts> findAllPartsAndType();
+
+    List<Parts> findPartsListByOrderId(Integer orderId);
 }

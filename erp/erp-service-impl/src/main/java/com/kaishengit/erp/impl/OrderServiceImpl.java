@@ -38,6 +38,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderPartsMapper orderPartsMapper;
 
+    @Autowired
+    private CarMapper carMapper;
+
+
     /**
      * 查询所有维修类型
      * @return ServiceTypeList
@@ -91,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         // 保存新增订单信息
         Order order = new Order();
         order.setOrderMoney(orderVo.getFee());
-        order.setState("1");
+        order.setState(Constant.ORDER_STATE_NEW);
         order.setCarId(orderVo.getCarId());
         order.setServiceTypeId(orderVo.getServiceTypeId());
 
@@ -103,7 +107,6 @@ public class OrderServiceImpl implements OrderService {
         orderEmployee.setEmployeeId(employeeId);
 
         orderEmployeeMapper.insert(orderEmployee);
-        System.out.println("获取的orderEmployee----"+orderEmployee);
 
         // 保存订单所有的部件信息
         for(PartsVo parts : orderVo.getPartsLists()){
@@ -113,7 +116,6 @@ public class OrderServiceImpl implements OrderService {
             orderParts.setNum(parts.getNum());
 
             orderPartsMapper.insert(orderParts);
-            System.out.println("获取的orderParts----"+orderParts);
         }
 
     }
@@ -133,4 +135,82 @@ public class OrderServiceImpl implements OrderService {
         PageInfo<Order> pageInfo = new PageInfo<>(orderlist);
         return pageInfo;
     }
+
+    /**
+     * 查询(order,car,customer)详情根据orderId
+     * @param id 订单的id值
+     * @return 返回订单详情
+     */
+    @Override
+    public Order findOrderAndCustomerAndCarById(Integer id) {
+        Order order = orderMapper.findOrderAndCustomerAndCarById(id);
+        return order;
+    }
+
+    /**
+     * 查询(ServiceType)服务类型,根据ServiceTypeId
+     * @param serviceTypeId order表中的serviceTypeId
+     * @return              服务的详情信息
+     */
+    @Override
+    public ServiceType findServiceTypeByOrderServiceTypeId(Integer serviceTypeId) {
+        ServiceType serviceType = serviceTypeMapper.selectByPrimaryKey(serviceTypeId);
+        return serviceType;
+    }
+
+    /**
+     * 查询-(orderParts)订单与部件的关联表, (parts)部件表, 根据orderId
+     * @param orderId 当前订单的id值
+     * @return 返回所有部件的集合
+     */
+    @Override
+    public List<Parts> findPartsListByOrderId(Integer orderId) {
+        List<Parts> partsList = partsMapper.findPartsListByOrderId(orderId);
+        return partsList;
+    }
+
+    /**
+     * 修改订单状态
+     * @param id 订单id
+     */
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void updateStateByOrderId(Integer id) throws ServiceException {
+        Order order = orderMapper.selectByPrimaryKey(id);
+        // 防止篡改orderId
+        if(id == null){
+            throw new ServiceException("订单错误");
+        }
+        // 防止表单重复提交, 状态不等于1时,不能重复提交
+        if(!order.getState().equals(Constant.ORDER_STATE_NEW)){
+            throw new ServiceException("该订单已经提交");
+        }
+        order.setState(Constant.ORDER_STATE_FIXING);
+        orderMapper.updateByPrimaryKeySelective(order);
+    }
+
+    /**
+     * 删除订单根据(orderId)
+     * car, ServiceType,
+     * @param id 订单id
+     */
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void delOrderById(Integer id) {
+        Order order = orderMapper.selectByPrimaryKey(id);
+        // 删除车辆信息根据表单的carId值
+        carMapper.deleteByPrimaryKey(order.getCarId());
+        // 删除订单与员工的关联关系表
+        OrderEmployeeExample orderEmployeeExample = new OrderEmployeeExample();
+        orderEmployeeExample.createCriteria().andOrderIdEqualTo(id);
+        orderEmployeeMapper.deleteByExample(orderEmployeeExample);
+        // 删除订单与部件的关联关系表
+        OrderPartsExample orderPartsExample = new OrderPartsExample();
+        orderPartsExample.createCriteria().andOrderIdEqualTo(id);
+        orderPartsMapper.deleteByExample(orderPartsExample);
+        // 删除订单
+        orderMapper.deleteByPrimaryKey(id);
+    }
+
+
 }

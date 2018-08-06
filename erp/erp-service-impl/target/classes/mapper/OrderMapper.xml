@@ -8,6 +8,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="car_id" jdbcType="INTEGER" property="carId" />
     <result column="service_type_id" jdbcType="INTEGER" property="serviceTypeId" />
+    <result column="state_name" jdbcType="VARCHAR" property="stateName"/>
   </resultMap>
 
   <resultMap id="orderWhitData" type="com.kaishengit.erp.entity.Order" extends="BaseResultMap">
@@ -23,6 +24,11 @@
       <result property="idCard" column="id_card"/>
       <result property="tel" column="tel"/>
     </association>
+    <collection property="orderState" ofType="com.kaishengit.erp.entity.OrderState" >
+      <id property="id" column="id"/>
+      <result property="stateName" column="state_name"/>
+    </collection>
+
   </resultMap>
 
 
@@ -200,6 +206,17 @@
           and `order`.create_time like ("%",#{createTime},"%")
         </if>
       </where>
+    </select>
+    <select id="findOrderAndCustomerAndCarById" resultMap="orderWhitData">
+      SELECT `order`.*, car.car_type, car.licence_no, car.car_no, customer.user_name, customer.tel, customer.id_card, order_state.state_name
+      from `order`
+      LEFT JOIN car
+      on `order`.car_id = car.id
+      LEFT JOIN customer
+      on car.customer_id = customer.id
+      LEFT JOIN order_state
+      on `order`.state = order_state.id
+      where `order`.id = #{id}
     </select>
     <update id="updateByExampleSelective" parameterType="map">
     update `order`

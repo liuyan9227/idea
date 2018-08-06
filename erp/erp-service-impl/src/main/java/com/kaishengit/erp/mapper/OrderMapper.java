@@ -31,4 +31,6 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     List<Order> findOrderAndCustomerAndCarWithLike(Map<String,Object> params);
+
+    Order findOrderAndCustomerAndCarById(Integer id);
 }

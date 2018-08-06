@@ -48,4 +48,37 @@ public interface OrderService {
      * @param params 查询条件
      */
     PageInfo<Order> findOrderAndCustomerAndCarWithLike(Integer p, Map<String,Object> params);
+
+    /**
+     * 查询(order,car,customer)详情根据orderId
+     * @param id 订单的id值
+     * @return 返回订单详情
+     */
+    Order findOrderAndCustomerAndCarById(Integer id);
+
+    /**
+     * 查询(ServiceType)服务类型,根据ServiceTypeId
+     * @param serviceTypeId order表中的serviceTypeId
+     * @return 服务详情信息
+     */
+    ServiceType findServiceTypeByOrderServiceTypeId(Integer serviceTypeId);
+
+    /**
+     * 查询-(orderParts)订单与部件的关联表, (parts)部件表, 根据orderId
+     * @param orderId 当前订单的id值
+     * @return 返回所有部件的集合
+     */
+    List<Parts> findPartsListByOrderId(Integer orderId);
+
+    /**
+     * 修改订单状态
+     * @param id 订单id
+     */
+    void updateStateByOrderId(Integer id);
+
+    /**
+     * 删除订单根据(orderId)
+     * @param id 订单id
+     */
+    void delOrderById(Integer id);
 }
