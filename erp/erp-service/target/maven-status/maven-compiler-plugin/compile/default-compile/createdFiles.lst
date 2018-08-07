@@ -1,2 +1,6 @@
+com\kaishengit\erp\service\CarService.class
+com\kaishengit\erp\service\EmployeeService.class
+com\kaishengit\erp\service\OrderService.class
 com\kaishengit\erp\service\TypeService.class
 com\kaishengit\erp\service\PartsService.class
+com\kaishengit\erp\service\RolePermissionService.class

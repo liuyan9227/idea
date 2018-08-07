@@ -183,7 +183,8 @@ public class OrderController {
 
     /**
      * 修改当前订单,需要回显信息根据(orderId)
-     * 回显car, customer, sercviceType, parts和orderParts
+     * 回调函数在页面加载时会发起ajax请求来展示前端详情 (mounted:)
+     * 回显car, customer, serviceType, parts和orderParts
      */
     @GetMapping("/{id:\\d+}/info")
     @ResponseBody
