@@ -1,0 +1,4 @@
+192.168.0.101 - - [09/Aug/2018:00:31:55 +0800] "GET /manage/employee/9/edit HTTP/1.1" 302 - http-bio-80-exec-1 321
+192.168.0.101 - - [09/Aug/2018:00:31:58 +0800] "GET / HTTP/1.1" 200 3038 http-bio-80-exec-2 2950
+192.168.0.101 - - [09/Aug/2018:00:32:03 +0800] "POST / HTTP/1.1" 302 - http-bio-80-exec-3 263
+192.168.0.101 - - [09/Aug/2018:00:32:03 +0800] "GET /manage/employee/9/edit HTTP/1.1" 500 7003 http-bio-80-exec-4 66

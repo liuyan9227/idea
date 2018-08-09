@@ -94,27 +94,6 @@ public class EmployeeController {
         return "error/401";
     }
 
-    /*@PostMapping("/")
-    public String loginPost(String userTel, String password, HttpServletRequest request, HttpSession session, RedirectAttributes redirectAttributes){
-        // 注意 : 所有业务在serviceImpl中完成
-        // 获得请求中的ip地址
-        String ip = request.getRemoteAddr();
-
-        try {
-            // 获取电话和密码查询返回employee对象
-            Employee employee = employeeService.findTelAndPassword(userTel, password, ip);
-            // 将用户设置在session中
-            session.setAttribute("employee", employee);
-
-            redirectAttributes.addFlashAttribute("employee", employee);
-            // 重定向到主页面,防止表单重复提交
-            return "redirect:/parts/";
-        } catch (ServiceException e) {
-            redirectAttributes.addFlashAttribute("message", e.getMessage());
-            return "redirect:/";
-        }
-    }*/
-
     /**
      * 员工信息主页面,搜索功能在本野种使用,采用(电话和帐号混输)和根据(角色信息)联合查找
      * 自写sql语句,采用模糊查询,使用if标签
@@ -122,27 +101,19 @@ public class EmployeeController {
     @GetMapping("/account/home")
     public String home(@RequestParam(defaultValue = "1", required = false) Integer p,
                        @RequestParam(required = false) Integer nameMobile,
-                       @RequestParam(required = false) Role role,
+                       @RequestParam(required = false) Integer roleId,
                        Model model){
-        System.out.println("-------------" + nameMobile);
-        System.out.println("=============" + role);
-        // 分页插件(是否应该在service层处理信息???)
-        PageHelper.startPage(p, Constant.DEFAULT_PAGE_SIZE);
-        // 将所有信息保存在Map集合中,用于传值
-        Map<String, Object> params = new HashMap<>();
-        params.put("nameMobile", nameMobile);
-        params.put("role", role);
-        // 将所有符合条件的员工信息展示在页面(搜索框中可能会输入查询条件)
-        List<Employee> employeeList = employeeService.findEmployeeByLike(p, params);
-        System.out.println("获得到的员工信息" + employeeList);
 
+        Map<String, Object> param = new HashMap<>();
+        param.put("nameMobile", nameMobile);
+        param.put("roleId", roleId);
 
-        /*// 查找所有的员工信息
-        List<Employee> employeeList = employeeService.findAll();
-        // 将List<employee>对象转换为PageInfo<Employee>对象, 本质还是一个List集合
-        PageInfo<Employee> page = new PageInfo<>(employeeList);
-*/
+        List<Employee> employeeList = employeeService.findEmployeeByLike(p, param);
+        List<Role> roleList = rolePermissionService.findRoleAll();
+
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("roleList", roleList);
+
         return "manage/account/home";
     }
 
@@ -165,6 +136,7 @@ public class EmployeeController {
     public String editEmployee(@PathVariable Integer id, Model model){
         // 回显员工信息
         Employee employee = employeeService.findEmployee(id);
+        System.out.println("员工信息employee----" + employee.getEmployeeName());
         // 查找所有角色信息
         List<Role> roleList = rolePermissionService.findRoleAll();
         // 回显员工的角色信息

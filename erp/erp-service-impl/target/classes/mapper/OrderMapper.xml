@@ -12,13 +12,13 @@
   </resultMap>
 
   <resultMap id="orderWhitData" type="com.kaishengit.erp.entity.Order" extends="BaseResultMap">
-    <association property="car" javaType="com.kaishengit.erp.entity.Car" column="car_id">
+    <association property="car" javaType="com.kaishengit.erp.entity.Car">
       <id property="id" column="car_id"/>
       <result property="carNo" column="car_no"/>
       <result property="carType" column="car_type"/>
       <result property="licenceNo" column="licence_no"/>
     </association>
-    <association property="customer" javaType="com.kaishengit.erp.entity.Customer" column="customer_id">
+    <association property="customer" javaType="com.kaishengit.erp.entity.Customer">
       <id property="id" column="customer_id"/>
       <result property="userName" column="user_name"/>
       <result property="idCard" column="id_card"/>
@@ -189,23 +189,38 @@
     </if>
   </select>
     <select id="findOrderAndCustomerAndCarWithLike" resultMap="orderWhitData">
-      SELECT `order`.*, car.car_type, car.licence_no, customer.user_name, customer.tel
-      from `order`
-      LEFT JOIN car
-      on `order`.car_id = car.id
-      LEFT JOIN customer
-      on car.customer_id = customer.id
+      SELECT
+      `order`.*, car.car_type,
+      car.licence_no,
+      car.car_no,
+      car.customer_id,
+      customer.user_name,
+      customer.id_card,
+      customer.tel,
+      order_state.state_name
+      FROM
+      `order`
+      LEFT JOIN car ON `order`.car_id = car.id
+      LEFT JOIN customer ON car.customer_id = customer.id
+      left join order_state on `order`.state = order_state.id
       <where>
         <if test="licenceNo != null and licenceNo != ''">
-          and licence_no like ("%",#{licenceNo},"%")
+          And car.licence_no = ("%",#{licenceNo},"%")
         </if>
         <if test="tel != null and tel != ''">
-          and customer.tel like ("%",#{tel},"%")
+          And customer.tel = ("%",#{tel},"%")
         </if>
-        <if test="createTime != null and createTime != ''">
-          and `order`.create_time like ("%",#{createTime},"%")
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+          AND (order.create_time >= #{startTime} and order.create_time &lt;= #{endTime})
+        </if>
+        <if test="state != null and state != ''">
+          And order.state =  #{state}
+        </if>
+        <if test="exState != null and exState != ''">
+          And order.state !=  #{exState}
         </if>
       </where>
+      order by order.create_time desc
     </select>
     <select id="findOrderAndCustomerAndCarById" resultMap="orderWhitData">
       SELECT `order`.*, car.car_type, car.licence_no, car.car_no, customer.user_name, customer.tel, customer.id_card, order_state.state_name

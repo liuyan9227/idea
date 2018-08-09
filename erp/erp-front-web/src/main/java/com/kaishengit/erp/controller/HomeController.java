@@ -51,7 +51,7 @@ public class HomeController {
             // 将请求封装在savedRequest对象中,可以提取request中的信息
             SavedRequest savedRequest = WebUtils.getSavedRequest(request);
             // 设置页面跳转的默认值,斜杠要配在url前面,不能写在redirect后面,获取url时前面会自动带上/斜杠
-            String url = "/car/new";
+            String url = "/order/undone/list";
             // 如果saveRequest路径不为null时,可能是过期等原因,需要登录跳转到之前访问的页面中
             if(savedRequest != null){
                 // 从savedRequest对象中获取访问的路径,重新赋值给URL

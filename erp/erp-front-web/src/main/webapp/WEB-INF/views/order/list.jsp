@@ -85,7 +85,7 @@
                 </div>
                 <!-- /.box-body -->
                 <!-- /.box -->
-
+            </div>
         </section>
         <!-- /.content -->
     </div>

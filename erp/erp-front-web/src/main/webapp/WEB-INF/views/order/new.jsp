@@ -236,166 +236,165 @@
 <script src="/static/dist/js/vue.js"></script>
 <script>
     $(function() {
-    var vm = new Vue({
-        el:"#app",
-        data: {
-            car:{},
-            customer :{},
-            serviceTypes:[],
-            partsTypes:[],
-            serviceType:{},
-            partsType:'',
-            partsList:[],
-            choosePartsList:[],
-            chooseParts:{}
-        },
-        methods:{
-            search:function(){
-                // 如果车牌号未空，不能发起请求
-                var licenceNo = this.car.licenceNo;
-                if(licenceNo) {
-                    $.get("/car/check",{"licenceNo":licenceNo}).done(function(res){
-                        if (res.state == 'success') {
-                            // 如果已存在显示车辆信息
+        var vm = new Vue({
+            el:"#app",
+            data: {
+                car:{},
+                customer :{},
+                serviceTypes:[],
+                partsTypes:[],
+                serviceType:{},
+                partsType:'',
+                partsList:[],
+                choosePartsList:[],
+                chooseParts:{}
+            },
+            methods:{
+                search:function(){
+                    // 如果车牌号未空，不能发起请求
+                    var licenceNo = this.car.licenceNo;
+                    if(licenceNo) {
+                        $.get("/car/check",{"licenceNo":licenceNo}).done(function(res){
+                            if (res.state == 'success') {
+                                // 如果已存在显示车辆信息
+                                vm.car = res.data;
+                                vm.customer = res.data.customer;
+                            } else {
+                                // 如果不存在则打开模态框新增车辆信息
+                                $("#addCarModal").modal({
+                                    show:true,
+                                    backdrop:'static'
+                                });
+                            }
+                        }).error(function(){
+                            layer.msg("系统异常")
+                        })
+                    } else {
+                        layer.alert("请填写车牌")
+                    }
+                },
+                addCarInfo:function(){
+                    $.post("/car/new",$("#addCarForm").serialize()).done(function(res){
+                        if (res.state = "success") {
                             vm.car = res.data;
                             vm.customer = res.data.customer;
-                        } else {
-                            // 如果不存在则打开模态框新增车辆信息
-                            $("#addCarModal").modal({
-                                show:true,
-                                backdrop:'static'
-                            });
+                            $("#addCarModal").modal('hide');
                         }
                     }).error(function(){
-                        layer.msg("系统异常")
-                    })
-                } else {
-                    layer.alert("请填写车牌")
-                }
-            },
-            addCarInfo:function(){
-                $.post("/car/new",$("#addCarForm").serialize()).done(function(res){
-                    if (res.state = "success") {
-                        vm.car = res.data;
-                        vm.customer = res.data.customer;
-                        $("#addCarModal").modal('hide');
-                    }
-                }).error(function(){
-                    layer.msg("系统异常");
-                })
-            } ,
-            addParts:function(){
-                var addFlag = false;
-                for(var i = 0; i < this.choosePartsList.length; i++) {
-                    if(this.chooseParts == this.choosePartsList[i]) {
-                        addFlag = true;
-
-                        this.choosePartsList[i].num = this.choosePartsList[i].num + 1;
-                        break;
-                    }
-                }
-                if(!addFlag) {
-                    this.choosePartsList.push(this.chooseParts);
-                }
-
-            },
-            changeType:function(){
-                if(this.partsType.id){
-                    $.get("/order/" + this.partsType.id + "/parts").done(function(response){
-                        for(var i = 0; i < response.data.length; i++) {
-                            response.data[i].num = 1;
-                        }
-                        vm.partsList = response.data;
-                    }).error(function(err){
                         layer.msg("系统异常");
+                    })
+                } ,
+                addParts:function(){
+                    var addFlag = false;
+                    for(var i = 0; i < this.choosePartsList.length; i++) {
+                        if(this.chooseParts == this.choosePartsList[i]) {
+                            addFlag = true;
+                            this.choosePartsList[i].num = this.choosePartsList[i].num + 1;
+                            break;
+                        }
+                    }
+                    if(!addFlag) {
+                        this.choosePartsList.push(this.chooseParts);
+                    }
+
+                },
+                changeType:function(){
+                    if(this.partsType.id){
+                        $.get("/order/" + this.partsType.id + "/parts").done(function(response){
+                            for(var i = 0; i < response.data.length; i++) {
+                                response.data[i].num = 1;
+                            }
+                            vm.partsList = response.data;
+                        }).error(function(err){
+                            layer.msg("系统异常");
+                        });
+                    }
+                },
+                minus:function(item){
+                    if(item.num){
+                        item.num--;
+                    }
+                },
+                plus:function(item){
+                    item.num++;
+                },
+                delParts:function(item){
+                    var index = this.choosePartsList.indexOf(item);
+                    this.choosePartsList.splice(index,1);
+                },
+                newOrder:function(){
+                    if(!this.car.id) {
+                        layer.msg("请填写车辆信息");
+                        return;
+                    }
+
+                    if(!this.serviceType.id) {
+                        layer.msg("请选择项目类型");
+                        return;
+                    }
+
+                    if(!this.choosePartsList.length) {
+                        layer.msg("请选择配件");
+                        return;
+                    }
+
+                    var partsLists = [];
+                    for(var i = 0; i < this.choosePartsList.length; i++){
+                        var parts = {};
+                        parts.id = this.choosePartsList[i].id;
+                        parts.num = this.choosePartsList[i].num;
+                        partsLists.push(parts);
+                    }
+
+                    $.ajax({ // axios
+                        type: "POST",
+                        url: "/order/new",
+                        data: {
+                            json: JSON.stringify({
+                                "carId": vm.car.id,
+                                "serviceTypeId": vm.serviceType.id,
+                                "fee": vm.fee,
+                                "partsLists":partsLists
+                            })
+                        },
+                        success: function(json){
+                            if(json.state == "success") {
+                                window.location.href = "/order/undone/list";
+                            }
+                        }
                     });
                 }
             },
-            minus:function(item){
-                if(item.num){
-                    item.num--;
-                }
-            },
-            plus:function(item){
-                item.num++;
-            },
-            delParts:function(item){
-                var index = this.choosePartsList.indexOf(item);
-                this.choosePartsList.splice(index,1);
-            },
-            newOrder:function(){
-                if(!this.car.id) {
-                    layer.msg("请填写车辆信息");
-                    return;
-                }
-
-                if(!this.serviceType.id) {
-                    layer.msg("请选择项目类型");
-                    return;
-                }
-
-                if(!this.choosePartsList.length) {
-                    layer.msg("请选择配件");
-                    return;
-                }
-
-                var partsLists = [];
-                for(var i = 0; i < this.choosePartsList.length; i++){
-                    var parts = {};
-                    parts.id = this.choosePartsList[i].id;
-                    parts.num = this.choosePartsList[i].num;
-                    partsLists.push(parts);
-                }
-
-                $.ajax({ // axios
-                    type: "POST",
-                    url: "/order/new",
-                    data: {
-                        json: JSON.stringify({
-                            "carId": vm.car.id,
-                            "serviceTypeId": vm.serviceType.id,
-                            "fee": vm.fee,
-                            "partsLists":partsLists
-                        })
-                    },
-                    success: function(json){
-                        if(json.state == "success") {
-                            window.location.href="/order/undone/list";
-                        }
+            computed:{
+                partsSum: function(){
+                    var sum = 0;
+                    var chooseParts;
+                    for(var i = 0; i < this.choosePartsList.length; i++) {
+                        chooseParts = this.choosePartsList[i];
+                        sum += chooseParts.salePrice * chooseParts.num;
                     }
+                    return sum;
+                },
+                hourFee: function(){
+                    return this.serviceType.serviceHour ? this.serviceType.serviceHour * 50 : 0;
+                },
+                fee: function(){
+                    return this.hourFee + this.partsSum;
+                }
+            },
+            mounted:function(){
+                $.get("/order/service/types").done(function(response){
+                    vm.serviceTypes = response.data;
+                }).error(function(err){
+                    layer.msg("系统异常");
+                });
+                $.get("/order/parts/types").done(function(response){
+                    vm.partsTypes = response.data;
+                }).error(function(err){
+                    layer.msg("系统异常");
                 });
             }
-        },
-        computed:{
-            partsSum: function(){
-                var sum = 0;
-                var chooseParts;
-                for(var i = 0; i < this.choosePartsList.length; i++) {
-                    chooseParts = this.choosePartsList[i];
-                    sum += chooseParts.salePrice * chooseParts.num;
-                }
-                return sum;
-            },
-            hourFee: function(){
-                return this.serviceType.serviceHour ? this.serviceType.serviceHour * 50 : 0;
-            },
-            fee: function(){
-                return this.hourFee + this.partsSum;
-            }
-        },
-        mounted:function(){
-            $.get("/order/service/types").done(function(response){
-                vm.serviceTypes = response.data;
-            }).error(function(err){
-                layer.msg("系统异常");
-            });
-            $.get("/order/parts/types").done(function(response){
-                vm.partsTypes = response.data;
-            }).error(function(err){
-                layer.msg("系统异常");
-            });
-        }
-    })
+        })
     })
 </script>
 </body>

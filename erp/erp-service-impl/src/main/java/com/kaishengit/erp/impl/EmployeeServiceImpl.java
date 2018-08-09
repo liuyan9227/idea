@@ -1,5 +1,6 @@
 package com.kaishengit.erp.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.kaishengit.erp.entity.*;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.mapper.EmployeeLoginLogMapper;
@@ -133,7 +134,11 @@ public class EmployeeServiceImpl implements EmployeeService {
      */
     @Override
     public Employee findEmployee(Integer id) {
+        System.out.println("获得的id==="+id);
         Employee employee = employeeMapper.selectByPrimaryKey(id);
+        if(employee == null){
+            throw new ServiceException("未查到此员工");
+        }
         return employee;
     }
 
@@ -201,17 +206,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     /**
      * 查询符合查询条件的员工信息(电话,帐号或者角色类型)
      * @param p      分页起始页
-     * @param params 需要查询满足的条件(当前Map集合中有的元素: nameMobile, role)
+     * @param param 需要查询满足的条件(当前Map集合中有的元素: nameMobile, role)
      * @return 返回符合模糊查询的员工信息
      */
     @Override
-    public List<Employee> findEmployeeByLike(Integer p, Map<String, Object> params) {
-        Integer num = (Integer) params.get("nameMobile");
-        Role role = (Role) params.get("role");
-        // 模糊查询根据件
-        List<Employee> employeeList = employeeMapper.findEmployeeByLike(params);
-
-
+    public List<Employee> findEmployeeByLike(Integer p, Map<String, Object> param) {
+        List<Employee> employeeList = employeeMapper.findEmployeeByLike(param);
         return employeeList;
     }
 }

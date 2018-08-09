@@ -3,6 +3,8 @@ package com.kaishengit.erp.service;
 import com.kaishengit.erp.entity.Car;
 import com.kaishengit.erp.entity.Customer;
 
+import java.util.List;
+
 
 /**
  * @author liuyan
@@ -23,4 +25,11 @@ public interface CarService {
      * @return car车辆对象
      */
     Car findCarByLicenseNo(String licenceNo);
+
+    /**
+     * 查找车辆信息根据carId
+     * @param id carId
+     * @return CarList
+     */
+    List<Car> findCarByid(Integer id);
 }

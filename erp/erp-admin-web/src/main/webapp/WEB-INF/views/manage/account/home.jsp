@@ -40,7 +40,7 @@
                         <input type="text" name="nameMobile" placeholder="账号或手机号码" class="form-control" value="${param.nameMobile}">
                         <select name="roleId" class="form-control">
                             <option value="">所有账号</option>
-                            <c:forEach items="${rolesList}" var="role">
+                            <c:forEach items="${roleList}" var="role">
                                 <option value="${role.id}" ${param.roleId == role.id ? 'selected' : ''}>${role.roleName}</option>
                             </c:forEach>
                         </select>

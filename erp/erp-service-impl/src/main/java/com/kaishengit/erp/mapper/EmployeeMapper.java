@@ -33,5 +33,5 @@ public interface EmployeeMapper {
 
     List<Employee> findAllEmployeeAndRoleList();
 
-    List<Employee> findEmployeeByLike(Map<String,Object> params);
+    List<Employee> findEmployeeByLike(Map<String,Object> param);
 }

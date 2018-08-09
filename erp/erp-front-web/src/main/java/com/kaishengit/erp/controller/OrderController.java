@@ -9,6 +9,7 @@ import com.kaishengit.erp.service.OrderService;
 import com.kaishengit.erp.service.TypeService;
 import com.kaishengit.erp.vo.OrderInfoVo;
 import com.kaishengit.erp.vo.OrderVo;
+import com.sun.corba.se.impl.orbutil.closure.Constant;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -108,7 +109,20 @@ public class OrderController {
      * 已完成页面
      */
     @GetMapping("/done/list")
-    public String orderDoneList(){
+    public String listOk(@RequestParam(defaultValue = "1", required = false) Integer p,
+                         @RequestParam(required = false) String licenceNo,
+                         @RequestParam(required = false) String tel,
+                         Model model){
+        // 创建一个map集合进行传值
+        Map<String, Object> params = new HashMap<>();
+        params.put("licenceNo", licenceNo);
+        params.put("tel", tel);
+        params.put("state", com.kaishengit.erp.utils.Constant.ORDER_STATE_FIXING);
+
+        // 查询所有表单信息
+        PageInfo<Order> page = orderService.findOrderAndCustomerAndCarWithLike(p, params);
+        model.addAttribute("page", page);
+        model.addAttribute("type", "done");
         return "order/hisList";
     }
 
@@ -122,13 +136,19 @@ public class OrderController {
      */
     @GetMapping("/undone/list")
     public String listNo(@RequestParam(defaultValue = "1", required = false) Integer p,
+                         @RequestParam(required = false) String licenceNo,
+                         @RequestParam(required = false) String tel,
                          Model model){
         // 创建一个map集合进行传值
         Map<String, Object> params = new HashMap<>();
+        params.put("licenceNo", licenceNo);
+        params.put("tel", tel);
+        params.put("state", com.kaishengit.erp.utils.Constant.ORDER_STATE_NEW);
 
         // 查询所有表单信息
-        PageInfo<Order> pageInfo = orderService.findOrderAndCustomerAndCarWithLike(p, params);
-        model.addAttribute("pageInfo", pageInfo);
+        PageInfo<Order> page = orderService.findOrderAndCustomerAndCarWithLike(p, params);
+        model.addAttribute("page", page);
+        model.addAttribute("type", "");
         return "order/list";
     }
 

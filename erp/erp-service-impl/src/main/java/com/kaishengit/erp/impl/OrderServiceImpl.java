@@ -75,9 +75,13 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<Parts> findPartsByTypeId(Integer id) {
+        System.out.println("----------------------------------");
+        System.out.println("是否获取typeId----"+id);
         PartsExample partsExample = new PartsExample();
         partsExample.createCriteria().andTypeIdEqualTo(id);
         List<Parts> partsList = partsMapper.selectByExample(partsExample);
+        System.out.println("是否查到信息"+ partsList);
+        System.out.println("==========================");
         if(partsList.isEmpty()){
             throw new ServiceException("未查到部件信息");
         }
@@ -128,7 +132,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public PageInfo<Order> findOrderAndCustomerAndCarWithLike(Integer p, Map<String, Object> params) {
         PageHelper.startPage(p, Constant.DEFAULT_PAGE_SIZE);
-
         // 将map集合对象之间传入进行sql查询,可以之间使用Key值进行传值
         List<Order> orderlist = orderMapper.findOrderAndCustomerAndCarWithLike(params);
 
@@ -210,6 +213,18 @@ public class OrderServiceImpl implements OrderService {
         orderPartsMapper.deleteByExample(orderPartsExample);
         // 删除订单
         orderMapper.deleteByPrimaryKey(id);
+    }
+
+    /**
+     * 查询订单根据状态为2
+     * @return 符合条件的所有订单
+     */
+    @Override
+    public List<Order> findOrderWhitState() {
+        OrderExample orderExample = new OrderExample();
+        orderExample.createCriteria().andStateEqualTo(Constant.ORDER_STATE_FIXING);
+        List<Order> orderList = orderMapper.selectByExample(orderExample);
+        return orderList;
     }
 
 

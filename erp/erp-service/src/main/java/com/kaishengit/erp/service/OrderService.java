@@ -81,4 +81,10 @@ public interface OrderService {
      * @param id 订单id
      */
     void delOrderById(Integer id);
+
+    /**
+     * 查询订单根据状态为2
+     * @return 符合条件的所有订单
+     */
+    List<Order> findOrderWhitState();
 }

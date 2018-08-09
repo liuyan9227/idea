@@ -27,16 +27,17 @@ public class CarController {
         return "order/new";
     }
 
-
+    /**
+     * 业务: 保存模态框(car, customer)
+     * 返回: json数据,需要回显存入的数据在页面, 根据前端页面显示需要把customer封装在car对象中
+     */
     @PostMapping("/new")
-    public String home(Car car, Customer customer, Model model){
-        System.out.println("获得的车辆" + car);
-        System.out.println("获得的客户" + customer);
+    @ResponseBody
+    public ResponseBean home(Car car, Customer customer){
         // 保存车辆和客户信息
         carService.saveCarAndCustomer(car, customer);
-        model.addAttribute("car", car);
-        model.addAttribute("customer", customer);
-        return "order/new";
+        car.setCustomer(customer);
+        return ResponseBean.success(car);
     }
 
     @ResponseBody

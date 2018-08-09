@@ -74,8 +74,8 @@ public interface EmployeeService {
     /**
      * 查询符合查询条件的员工信息
      * @param p 分页起始页
-     * @param params 需要查询满足的条件
+     * @param param 需要查询满足的条件
      * @return 返回符合模糊查询的员工信息
      */
-    List<Employee> findEmployeeByLike(Integer p, Map<String,Object> params);
+    List<Employee> findEmployeeByLike(Integer p, Map<String,Object> param);
 }

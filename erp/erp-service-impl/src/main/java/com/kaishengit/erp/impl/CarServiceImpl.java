@@ -70,5 +70,17 @@ public class CarServiceImpl implements CarService {
         return car;
     }
 
+    /**
+     * 查找车辆信息根据carId
+     * @param id carId
+     * @return CarList
+     */
+    @Override
+    public List<Car> findCarByid(Integer id) {
+
+
+        return null;
+    }
+
 
 }
