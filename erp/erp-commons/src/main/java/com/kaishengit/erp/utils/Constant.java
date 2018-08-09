@@ -20,4 +20,6 @@ public class Constant {
     public static final String ORDER_STATE_DONE = "5";
 
 
+    // 工时费
+    public static final int DEFAULT_HOUR_FEE = 50;
 }

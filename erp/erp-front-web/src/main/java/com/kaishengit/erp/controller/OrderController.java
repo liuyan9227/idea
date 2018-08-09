@@ -117,7 +117,6 @@ public class OrderController {
         Map<String, Object> params = new HashMap<>();
         params.put("licenceNo", licenceNo);
         params.put("tel", tel);
-        params.put("state", com.kaishengit.erp.utils.Constant.ORDER_STATE_FIXING);
 
         // 查询所有表单信息
         PageInfo<Order> page = orderService.findOrderAndCustomerAndCarWithLike(p, params);
@@ -143,7 +142,6 @@ public class OrderController {
         Map<String, Object> params = new HashMap<>();
         params.put("licenceNo", licenceNo);
         params.put("tel", tel);
-        params.put("state", com.kaishengit.erp.utils.Constant.ORDER_STATE_NEW);
 
         // 查询所有表单信息
         PageInfo<Order> page = orderService.findOrderAndCustomerAndCarWithLike(p, params);

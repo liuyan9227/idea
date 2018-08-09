@@ -2,6 +2,8 @@ package com.kaishengit.erp.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.kaishengit.erp.dto.OrderInfoDto;
 import com.kaishengit.erp.entity.*;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.mapper.*;
@@ -10,11 +12,19 @@ import com.kaishengit.erp.utils.Constant;
 import com.kaishengit.erp.vo.OrderVo;
 import com.kaishengit.erp.vo.PartsVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
 import java.util.List;
 import java.util.Map;
+
+import static org.apache.camel.model.dataformat.JsonLibrary.Gson;
 
 /**
  * @author liuyan
@@ -41,6 +51,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private CarMapper carMapper;
 
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     /**
      * 查询所有维修类型
@@ -173,7 +185,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 修改订单状态
+     * 修改订单状态(下单)
      * @param id 订单id
      */
     @Override
@@ -190,6 +202,43 @@ public class OrderServiceImpl implements OrderService {
         }
         order.setState(Constant.ORDER_STATE_FIXING);
         orderMapper.updateByPrimaryKeySelective(order);
+
+        sendOrderToFixMq(id);
+    }
+
+
+    /**
+     * 业务: 将front下单消息放到消息队列中(将消息封装为json数据)fix接收
+     * 注意:
+     * 1.获取表单所有信息
+     * 2.获取表单所有服务信息
+     * 3.获取表单所有配件信息
+     * 4.将所有的订单信息封装为json数据(下单页面)
+     */
+    public void sendOrderToFixMq(Integer id){
+
+        Order order = orderMapper.selectByPrimaryKey(id);
+
+        ServiceType serviceType = serviceTypeMapper.selectByPrimaryKey(order.getServiceTypeId());
+
+        List<Parts> partsList = partsMapper.findPartsListByOrderId(id);
+
+        // 封装下单页面的所有数据与一个实体类中(dto数据传输实体类),将此实体类转化为json数据
+        OrderInfoDto orderInfoDto = new OrderInfoDto();
+        orderInfoDto.setOrder(order);
+        orderInfoDto.setServiceType(serviceType);
+        orderInfoDto.setPartsList(partsList);
+
+        // 将实体类转化为json数据
+        Gson gson = new Gson();
+        String json = gson.toJson(orderInfoDto);
+
+        jmsTemplate.send(new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                return session.createTextMessage(json);
+            }
+        });
     }
 
     /**
@@ -226,6 +275,8 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orderList = orderMapper.selectByExample(orderExample);
         return orderList;
     }
+
+
 
 
 }

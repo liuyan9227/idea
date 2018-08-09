@@ -1,3 +1,4 @@
+com\kaishengit\erp\controller\FixController.class
 com\kaishengit\erp\controller\HomeController.class
 com\kaishengit\erp\shiro\CustomerFilterChainDefinition.class
 com\kaishengit\erp\shiro\MyRealm.class

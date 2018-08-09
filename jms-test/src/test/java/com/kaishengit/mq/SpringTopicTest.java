@@ -33,7 +33,6 @@ public class SpringTopicTest {
                 return session.createTextMessage("spring,topic-3");
             }
         });
-
     }
 
     @Test
