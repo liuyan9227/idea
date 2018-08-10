@@ -23,4 +23,5 @@ D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\impl\Employee
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\FixOrderMapper.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\EmployeeMapper.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\RolePermissionMapper.java
+D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mq\FixFrontListener.java
 D:\java\idea\erp\erp-service-impl\src\main\java\com\kaishengit\erp\mapper\EmployeeLoginLogMapper.java

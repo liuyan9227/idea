@@ -12,12 +12,16 @@ public class Constant {
     public static final String PERMISSION_TYPE_MENU = "菜单";
     public static final String PERMISSION_TYPE_BUTTON = "按钮";
 
-    // 订单状态 1：待维修 2：维修中 3：质检中 4：结算中 5：完成
+    /**
+     * 订单状态 1：新订单 2：已下发 3：维修中 4：维修完成 5：质检中 6：结算中 7：完成
+     */
     public static final String ORDER_STATE_NEW = "1";
-    public static final String ORDER_STATE_FIXING = "2";
-    public static final String ORDER_STATE_CHECKING = "3";
-    public static final String ORDER_STATE_SETTLEMENT = "4";
-    public static final String ORDER_STATE_DONE = "5";
+    public static final String ORDER_STATE_TRANS = "2";
+    public static final String ORDER_STATE_FIXING = "3";
+    public static final String ORDER_STATE_FIXED = "4";
+    public static final String ORDER_STATE_CHECKING = "5";
+    public static final String ORDER_STATE_SETTLEMENT = "6";
+    public static final String ORDER_STATE_DONE = "7";
 
 
     // 工时费

@@ -50,4 +50,17 @@ public interface FixService {
      * @param id orderId
      */
     void updateStateByOrderId(Integer id);
+
+    /**
+     * 查询表单信息根据orderId
+     * @param id orderId
+     * @return 表单信息
+     */
+    FixOrder findOrderById(Integer id);
+
+    /**
+     * 保存接单的(维修人员)信息到fixOrder表中
+     * @param employee 当前登录员工(接单的员工)
+     */
+    void saveEmployeeFromFixOrder(Integer id, Employee employee);
 }

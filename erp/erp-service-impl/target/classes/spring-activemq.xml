@@ -38,10 +38,12 @@
     <!-- 接收消息 -->
     <!--4. 配置消费者的监听器-->
     <bean id="fixOrderListener" class="com.kaishengit.erp.mq.FixOrderListener"/>
+    <bean id="fixFrontListener" class="com.kaishengit.erp.mq.FixFrontListener"/>
 
     <!--5. 配置多个监听器-->
     <jms:listener-container acknowledge="client" concurrency="3-10">
         <jms:listener destination="order-queue-ly" ref="fixOrderListener"/>
+        <jms:listener destination="fix-front-queue" ref="fixFrontListener"/>
     </jms:listener-container>
 
 </beans>

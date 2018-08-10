@@ -187,7 +187,7 @@ public class OrderController {
     @GetMapping("{id:\\d+}/del")
     public String orderDel(@PathVariable Integer id){
         orderService.delOrderById(id);
-        return "order/hisList";
+        return "redirect:/order/undone/list";
     }
 
     /**

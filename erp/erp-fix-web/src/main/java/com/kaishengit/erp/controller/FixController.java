@@ -46,8 +46,8 @@ public class FixController {
     public String fixOrderHome(Model model){
 
         List<String> state = new ArrayList<>();
+        state.add(Constant.ORDER_STATE_TRANS);
         state.add(Constant.ORDER_STATE_FIXING);
-        state.add(Constant.ORDER_STATE_CHECKING);
 
         List<FixOrder> fixOrderList = fixService.findOrderByState(state);
 
@@ -95,18 +95,41 @@ public class FixController {
      * 注意:
      * 获取当前登录员工信息
      * 创建维修员工与当前表单的关联关系表
-     * 领取后更改订单当前状态并返回给前台状态信息
+     * 将当前员工信息保存在fixOrder表中作为显示
+     * 向detail页面传值,进行详情显示
+     * 显示订单维修人员的名字
+     * 前台显示完成按钮根据curr_employee_id显示
      */
     @GetMapping("/{id:\\d+}/make")
-    public String fixOrderMake(@PathVariable Integer id){
+    public String fixOrderMake(@PathVariable Integer id, Model model){
         Subject subject = SecurityUtils.getSubject();
         Employee employee = (Employee) subject.getPrincipal();
-
+        // 创建维修员工与当前表单的关联关系表
         fixService.saveOrderAndEmployee(id, employee);
-
-        fixService.updateStateByOrderId(id);
+        // 更新接单员工到fixOrder中
+        fixService.saveEmployeeFromFixOrder(id, employee);
+        // 页面回显当前表单信息根据orderId
+        FixOrder fixOrder = fixService.findOrderById(id);
+        // 向前端发送当前登录员工信息
+        model.addAttribute("curr_employee_id", employee.getId());
+        model.addAttribute("fixOrder", fixOrder);
         return "fix/detail";
     }
+
+    /**
+     * 业务:维修完成,更改状态
+     * 注意:
+     * fixOrder进行查询
+     * 点击完成按钮将状态改变,发送状态至前台使前台更新表单状态
+     */
+    @GetMapping("/{id:\\d+}/done")
+    public String detatil(@PathVariable Integer id){
+        // 修改当前订单状态为4:维修完成
+        fixService.updateStateByOrderId(id);
+        return "fix/check";
+    }
+
+
 
 
 }

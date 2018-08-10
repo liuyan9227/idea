@@ -3,6 +3,7 @@ package com.kaishengit.erp.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
+import com.kaishengit.erp.dto.FixStateDto;
 import com.kaishengit.erp.dto.OrderInfoDto;
 import com.kaishengit.erp.entity.*;
 import com.kaishengit.erp.exception.ServiceException;
@@ -143,6 +144,12 @@ public class OrderServiceImpl implements OrderService {
         // 将map集合对象之间传入进行sql查询,可以之间使用Key值进行传值
         List<Order> orderlist = orderMapper.findOrderAndCustomerAndCarWithLike(params);
 
+        for(Order order : orderlist){
+            if(Constant.ORDER_STATE_DONE.equals(order.getState())){
+                PageInfo<Order> pageInfo = new PageInfo<>(orderlist);
+                return pageInfo;
+            }
+        }
         PageInfo<Order> pageInfo = new PageInfo<>(orderlist);
         return pageInfo;
     }
@@ -196,7 +203,7 @@ public class OrderServiceImpl implements OrderService {
         if(!order.getState().equals(Constant.ORDER_STATE_NEW)){
             throw new ServiceException("该订单已经提交");
         }
-        order.setState(Constant.ORDER_STATE_FIXING);
+        order.setState(Constant.ORDER_STATE_TRANS);
         orderMapper.updateByPrimaryKeySelective(order);
 
         sendOrderToFixMq(id);
@@ -212,7 +219,6 @@ public class OrderServiceImpl implements OrderService {
      * 4.将所有的订单信息封装为json数据(下单页面)
      */
     public void sendOrderToFixMq(Integer id){
-
         // 多表联查order,car,customer
         Order order = orderMapper.findOrderAndCustomerAndCarById(id);
 
@@ -273,7 +279,20 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
+    /**
+     * 获取维修信息的json数据
+     * @param json 维修信息
+     */
+    @Override
+    public void comFixStateMq(String json) {
+        Gson gson = new Gson();
+        FixStateDto fixStateDto = gson.fromJson(json, FixStateDto.class);
 
+        Order order = new Order();
+        order.setId(fixStateDto.getOrderId());
+        order.setState(fixStateDto.getState());
+        orderMapper.updateByPrimaryKeySelective(order);
+    }
 
 
 }

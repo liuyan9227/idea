@@ -85,5 +85,9 @@ public interface OrderService {
      */
     List<Order> findOrderWhitState();
 
-
+    /**
+     * 获取维修信息的json数据
+     * @param json 维修信息
+     */
+    void comFixStateMq(String json);
 }

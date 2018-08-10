@@ -17,6 +17,7 @@
       <result property="carNo" column="car_no"/>
       <result property="carType" column="car_type"/>
       <result property="licenceNo" column="licence_no"/>
+      <result property="color" column="color"/>
     </association>
     <association property="customer" javaType="com.kaishengit.erp.entity.Customer">
       <id property="id" column="customer_id"/>
