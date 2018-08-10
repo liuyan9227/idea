@@ -1,10 +1,7 @@
 package com.kaishengit.erp.service;
 
 import com.github.pagehelper.PageInfo;
-import com.kaishengit.erp.entity.Order;
-import com.kaishengit.erp.entity.Parts;
-import com.kaishengit.erp.entity.ServiceType;
-import com.kaishengit.erp.entity.Type;
+import com.kaishengit.erp.entity.*;
 import com.kaishengit.erp.vo.OrderVo;
 
 import java.util.List;
@@ -87,4 +84,6 @@ public interface OrderService {
      * @return 符合条件的所有订单
      */
     List<Order> findOrderWhitState();
+
+
 }

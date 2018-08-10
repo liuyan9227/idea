@@ -29,7 +29,7 @@ public interface CarService {
     /**
      * 查找车辆信息根据carId
      * @param id carId
-     * @return CarList
+     * @return Car
      */
-    List<Car> findCarByid(Integer id);
+    Car findCarByid(Integer id);
 }

@@ -27,4 +27,6 @@ public interface FixOrderMapper {
     int updateByPrimaryKeySelective(FixOrder record);
 
     int updateByPrimaryKey(FixOrder record);
+
+    List<FixOrder> findOrderWithState(List<String> state);
 }

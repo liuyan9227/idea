@@ -87,13 +87,9 @@ public class OrderServiceImpl implements OrderService {
      */
     @Override
     public List<Parts> findPartsByTypeId(Integer id) {
-        System.out.println("----------------------------------");
-        System.out.println("是否获取typeId----"+id);
         PartsExample partsExample = new PartsExample();
         partsExample.createCriteria().andTypeIdEqualTo(id);
         List<Parts> partsList = partsMapper.selectByExample(partsExample);
-        System.out.println("是否查到信息"+ partsList);
-        System.out.println("==========================");
         if(partsList.isEmpty()){
             throw new ServiceException("未查到部件信息");
         }
@@ -217,7 +213,8 @@ public class OrderServiceImpl implements OrderService {
      */
     public void sendOrderToFixMq(Integer id){
 
-        Order order = orderMapper.selectByPrimaryKey(id);
+        // 多表联查order,car,customer
+        Order order = orderMapper.findOrderAndCustomerAndCarById(id);
 
         ServiceType serviceType = serviceTypeMapper.selectByPrimaryKey(order.getServiceTypeId());
 

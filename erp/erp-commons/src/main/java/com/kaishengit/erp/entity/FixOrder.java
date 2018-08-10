@@ -3,6 +3,7 @@ package com.kaishengit.erp.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -72,6 +73,19 @@ public class FixOrder implements Serializable {
      * 车主电话
      */
     private String customerTel;
+
+    /**
+     * 部件列表
+     */
+    private List<Parts> partsList;
+
+    public List<Parts> getPartsList() {
+        return partsList;
+    }
+
+    public void setPartsList(List<Parts> partsList) {
+        this.partsList = partsList;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -228,25 +242,21 @@ public class FixOrder implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", orderId=").append(orderId);
-        sb.append(", orderType=").append(orderType);
-        sb.append(", orderTime=").append(orderTime);
-        sb.append(", state=").append(state);
-        sb.append(", orderMoney=").append(orderMoney);
-        sb.append(", orderServiceHour=").append(orderServiceHour);
-        sb.append(", orderServiceHourFee=").append(orderServiceHourFee);
-        sb.append(", orderPartsFee=").append(orderPartsFee);
-        sb.append(", carType=").append(carType);
-        sb.append(", carColor=").append(carColor);
-        sb.append(", carLicence=").append(carLicence);
-        sb.append(", customerName=").append(customerName);
-        sb.append(", customerTel=").append(customerTel);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "FixOrder{" +
+                "orderId=" + orderId +
+                ", orderType='" + orderType + '\'' +
+                ", orderTime=" + orderTime +
+                ", state='" + state + '\'' +
+                ", orderMoney=" + orderMoney +
+                ", orderServiceHour='" + orderServiceHour + '\'' +
+                ", orderServiceHourFee=" + orderServiceHourFee +
+                ", orderPartsFee=" + orderPartsFee +
+                ", carType='" + carType + '\'' +
+                ", carColor='" + carColor + '\'' +
+                ", carLicence='" + carLicence + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", customerTel='" + customerTel + '\'' +
+                ", partsList=" + partsList +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package com.kaishengit.erp.impl;
 import com.google.gson.Gson;
 import com.kaishengit.erp.dto.OrderInfoDto;
 import com.kaishengit.erp.entity.*;
+import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.mapper.FixOrderMapper;
 import com.kaishengit.erp.mapper.FixOrderPartsMapper;
 import com.kaishengit.erp.mapper.OrderEmployeeMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author liuyan
@@ -92,5 +94,67 @@ public class FixServiceImpl implements FixService {
         orderEmployee.setOrderId(order);
         orderEmployee.setEmployeeId(employee.getId());
         orderEmployeeMapper.insert(orderEmployee);
+    }
+
+    /**
+     * 查询维修中与维修完成订单根据State=2,3
+     * @param state 订单状态
+     * @return 返回条件相符的订单
+     */
+    @Override
+    public List<FixOrder> findOrderByState(List<String> state) {
+        List<FixOrder> fixOrderList = fixOrderMapper.findOrderWithState(state);
+        return fixOrderList;
+    }
+
+    /**
+     * 查询当前员工是否有正在维修的订单
+     * @param id 员工id
+     * @return 是否存在
+     */
+    @Override
+    public boolean isOrderByEmployee(Integer id) {
+        OrderEmployeeExample orderEmployeeExample = new OrderEmployeeExample();
+        orderEmployeeExample.createCriteria().andEmployeeIdEqualTo(id);
+        List<OrderEmployee> orderEmployeeList = orderEmployeeMapper.selectByExample(orderEmployeeExample);
+
+        for(OrderEmployee orderEmployee : orderEmployeeList){
+            FixOrder fixOrder = fixOrderMapper.selectByPrimaryKey(orderEmployee.getOrderId());
+            if(Constant.ORDER_STATE_FIXING.equals(fixOrder.getState())){
+                if(orderEmployeeList.size() == 1){
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+    /**
+     * 保存当前(登录员工和订单的关联关系表)
+     * @param id       订单id
+     * @param employee 当前员工信息
+     */
+    @Override
+    public void saveOrderAndEmployee(Integer id, Employee employee) {
+        OrderEmployee orderEmployee = new OrderEmployee();
+        orderEmployee.setEmployeeId(employee.getId());
+        orderEmployee.setOrderId(id);
+        orderEmployeeMapper.insert(orderEmployee);
+    }
+
+    /**
+     * 更改领取的订单状态
+     * @param id orderId
+     */
+    @Override
+    public void updateStateByOrderId(Integer id) {
+        FixOrder fixOrder = fixOrderMapper.selectByPrimaryKey(id);
+        if(fixOrder == null){
+            throw new ServiceException("订单不存在");
+        }
+        FixOrderExample fixOrderExample = new FixOrderExample();
+        fixOrderExample.createCriteria().andStateEqualTo(Constant.ORDER_STATE_CHECKING);
+        fixOrderMapper.updateByExampleSelective(fixOrder, fixOrderExample);
     }
 }

@@ -15,6 +15,15 @@
     <result column="car_licence" jdbcType="VARCHAR" property="carLicence" />
     <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <result column="customer_tel" jdbcType="VARCHAR" property="customerTel" />
+      <collection property="partsList" ofType="com.kaishengit.erp.entity.FixOrderParts">
+          <id property="id" column="id"/>
+          <result property="orderId" column="order_id"/>
+          <result property="partsId" column="parts_id"/>
+          <result property="partsName" column="parts_name"/>
+          <result property="partsNo" column="parts_no"/>
+          <result property="partsNum" column="parts_num"/>
+      </collection>
+
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -219,7 +228,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="findOrderWithState" parameterType="list" resultMap="BaseResultMap">
+        select fix_order.*, fix_order_parts.*
+        from fix_order
+        left join fix_order_parts
+        on fix_order.order_id = fix_order_parts.order_id
+        where state in
+        <foreach collection="list" item="num" separator="," open="(" close=")">
+            #{num}
+        </foreach>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
     update fix_order
     <set>
       <if test="record.orderId != null">

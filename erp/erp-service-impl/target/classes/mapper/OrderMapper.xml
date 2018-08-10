@@ -223,7 +223,7 @@
       order by order.create_time desc
     </select>
     <select id="findOrderAndCustomerAndCarById" resultMap="orderWhitData">
-      SELECT `order`.*, car.car_type, car.licence_no, car.car_no, customer.user_name, customer.tel, customer.id_card, order_state.state_name
+      SELECT `order`.*, car.car_type, car.licence_no, car.car_no, customer.user_name, customer.tel, customer.id_card, order_state.state_name, color
       from `order`
       LEFT JOIN car
       on `order`.car_id = car.id

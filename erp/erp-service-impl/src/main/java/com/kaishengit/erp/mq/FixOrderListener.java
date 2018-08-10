@@ -1,6 +1,5 @@
 package com.kaishengit.erp.mq;
 
-import com.kaishengit.erp.entity.FixOrder;
 import com.kaishengit.erp.service.FixService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

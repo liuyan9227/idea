@@ -73,10 +73,10 @@ public class CarServiceImpl implements CarService {
     /**
      * 查找车辆信息根据carId
      * @param id carId
-     * @return CarList
+     * @return Car
      */
     @Override
-    public List<Car> findCarByid(Integer id) {
+    public Car findCarByid(Integer id) {
 
 
         return null;
