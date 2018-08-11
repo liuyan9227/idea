@@ -4,3 +4,4 @@ com\kaishengit\erp\service\TypeService.class
 com\kaishengit\erp\service\CarService.class
 com\kaishengit\erp\service\PartsService.class
 com\kaishengit\erp\service\RolePermissionService.class
+com\kaishengit\erp\service\FixService.class

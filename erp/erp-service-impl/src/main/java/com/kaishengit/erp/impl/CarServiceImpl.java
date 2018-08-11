@@ -43,7 +43,7 @@ public class CarServiceImpl implements CarService {
         Integer customerId = null;
         if(customerList == null || customerList.size() == 0){
             // 如果不存在,存该用户,获取用户id值
-            customerMapper.insert(customer);
+            customerMapper.insertSelective(customer);
             customerId = customer.getId();
         } else {
             // 如果存在获取用户id值
@@ -70,17 +70,6 @@ public class CarServiceImpl implements CarService {
         return car;
     }
 
-    /**
-     * 查找车辆信息根据carId
-     * @param id carId
-     * @return Car
-     */
-    @Override
-    public Car findCarByid(Integer id) {
-
-
-        return null;
-    }
 
 
 }

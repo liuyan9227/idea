@@ -130,7 +130,7 @@
       #{carNo,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, #{color,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.kaishengit.erp.entity.Car">
+  <insert id="insertSelective" parameterType="com.kaishengit.erp.entity.Car" useGeneratedKeys="true" keyProperty="id">
     insert into car
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

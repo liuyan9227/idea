@@ -126,7 +126,7 @@ public class FixController {
     public String detatil(@PathVariable Integer id){
         // 修改当前订单状态为4:维修完成
         fixService.updateStateByOrderId(id);
-        return "fix/check";
+        return "check/list";
     }
 
 

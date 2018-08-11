@@ -107,13 +107,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.kaishengit.erp.entity.Customer">
+  <insert id="insert" parameterType="com.kaishengit.erp.entity.Customer" useGeneratedKeys="true" keyProperty="id">
     insert into customer (id, user_name, id_card, 
       tel, create_time)
     values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
       #{tel,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.kaishengit.erp.entity.Customer">
+  <insert id="insertSelective" parameterType="com.kaishengit.erp.entity.Customer" useGeneratedKeys="true" keyProperty="id">
     insert into customer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

@@ -26,10 +26,4 @@ public interface CarService {
      */
     Car findCarByLicenseNo(String licenceNo);
 
-    /**
-     * 查找车辆信息根据carId
-     * @param id carId
-     * @return Car
-     */
-    Car findCarByid(Integer id);
 }

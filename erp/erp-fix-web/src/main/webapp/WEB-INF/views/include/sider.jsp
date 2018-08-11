@@ -17,8 +17,18 @@
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/order/undone/list"><i class="fa fa-circle-o"></i>订单查询</a></li>
-                    <li><a href="/order/new"><i class="fa fa-circle-o"></i>新增订单</a></li>
+                    <li><a href="/fix"><i class="fa fa-circle-o"></i>订单领取</a></li>
+                </ul>
+            </li><!-- 保养服务 -->
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-share-alt"></i> <span>保养服务</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/check"><i class="fa fa-circle-o"></i>订单领取</a></li>
                 </ul>
             </li>
 

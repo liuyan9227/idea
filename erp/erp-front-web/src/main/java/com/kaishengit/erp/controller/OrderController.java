@@ -9,8 +9,8 @@ import com.kaishengit.erp.service.OrderService;
 import com.kaishengit.erp.service.TypeService;
 import com.kaishengit.erp.vo.OrderInfoVo;
 import com.kaishengit.erp.vo.OrderVo;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,7 +65,6 @@ public class OrderController {
     @GetMapping("/{id:\\d+}/parts")
     @ResponseBody
     public ResponseBean findPartsType(@PathVariable Integer id){
-        System.out.println("类型信息---------"+id);
         List<Parts> partsType = orderService.findPartsByTypeId(id);
         return ResponseBean.success(partsType);
     }
@@ -96,8 +95,9 @@ public class OrderController {
         Gson gson = new Gson();
         // 使用fromJson()将json数据转化为对象,参数传(json数据, 解析json数据的类.class)
         OrderVo orderVo = gson.fromJson(json, OrderVo.class);
+
         // 获取当前登录员工信息
-        org.apache.shiro.subject.Subject subject = SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject();
         Employee employee = (Employee) subject.getPrincipal();
         Integer employeeId = employee.getId();
         // 将对象传入后台保存到数据库
@@ -240,7 +240,7 @@ public class OrderController {
         // 使用fromJson()将json数据转化为对象,参数传(json数据, 解析json数据的类.class)
         OrderVo orderVo = gson.fromJson(json, OrderVo.class);
         // 获取当前登录员工信息
-        org.apache.shiro.subject.Subject subject = SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject();
         Employee employee = (Employee) subject.getPrincipal();
         Integer employeeId = employee.getId();
         // 将对象传入后台保存到数据库
