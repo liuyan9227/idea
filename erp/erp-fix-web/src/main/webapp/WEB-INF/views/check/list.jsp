@@ -38,7 +38,7 @@
                         <div class="panel panel-info">
                             <!-- Default panel contents -->
                             <div class="panel-heading">
-                                <a href="/fix/${fixOrder.orderId}/detail">订单号：${fixOrder.orderId}</a> - ${fixOrder.carType} - ${fixOrder.orderType}
+                                <a href="/check/${fixOrder.orderId}/detail">订单号：${fixOrder.orderId}</a> - ${fixOrder.carType} - ${fixOrder.orderType}
                                 <c:if test="${fixOrder.state == '2'}">
                                     <button rel="${fixOrder.orderId}" class="btn btn-success btn-sm pull-right receiveBtn">任务领取</button>
                                 </c:if>
@@ -75,10 +75,10 @@
             var orderId = $(this).attr("rel");
             layer.confirm("确定接收该任务么？", function(){
                 // 改成ajax方式：error：当前员工已有正在进行的维修任务
-                $.get("/fix/" + orderId + "/receive").done(function(res){
+                $.get("/check/" + orderId + "/receive").done(function(res){
                     if(res.state = "success"){
                         if(res){
-                            window.location.href="/fix/" + orderId + "/make";
+                            window.location.href="/check/" + orderId + "/make";
                         } else {
                             layer.msg("您已经有正在维修的订单,请完成后再接单");
                         }
