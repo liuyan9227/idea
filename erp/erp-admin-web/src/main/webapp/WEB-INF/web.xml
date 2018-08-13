@@ -45,7 +45,7 @@
     <!-- 扫描xml文件 | 如果扫描子子文件在路径和名字后加* -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:spring*.xml</param-value>
+        <param-value>classpath*:spring/*.xml</param-value>
     </context-param>
 
     <!-- 中央控制器 -->

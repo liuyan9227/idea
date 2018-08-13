@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--自定义服务名称-->
+    <dubbo:application name="ErpAdminWeb"/>
+
+    <!--服务端口-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!--需要的服务-->
+    <dubbo:reference interface="com.kaishengit.erp.service.RolePermissionService" id="rolePermissionService"/>
+    <dubbo:reference interface="com.kaishengit.erp.service.EmployeeService" id="employeeService"/>
+    <dubbo:reference interface="com.kaishengit.erp.service.PartsService" id="partsService"/>
+    <dubbo:reference interface="com.kaishengit.erp.service.OrderService" id="orderService"/>
+    <dubbo:reference interface="com.kaishengit.erp.service.CarService" id="carService"/>
+    <dubbo:reference interface="com.kaishengit.erp.service.TypeService" id="typeService"/>
+
+</beans>

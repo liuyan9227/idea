@@ -6,7 +6,6 @@ import com.kaishengit.erp.dto.ResponseBean;
 import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.Role;
 import com.kaishengit.erp.exception.ServiceException;
-import com.kaishengit.erp.mapper.EmployeeMapper;
 import com.kaishengit.erp.service.EmployeeService;
 import com.kaishengit.erp.utils.Constant;
 import com.kaishengit.erp.service.RolePermissionService;

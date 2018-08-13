@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!--自定义生产者服务名-->
+    <dubbo:application name="ErpServiceProvider"/>
+
+    <!--服务地址-->
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+
+    <!--指定端口-->
+    <!--<dubbo:protocol host="192.168.1.120" port="20880"/>-->
+
+    <!--实现类-->
+    <bean id="carService" class="com.kaishengit.erp.impl.CarServiceImpl"/>
+    <bean id="employeeService" class="com.kaishengit.erp.impl.EmployeeServiceImpl"/>
+    <bean id="fixService" class="com.kaishengit.erp.impl.FixServiceImpl"/>
+    <bean id="orderService" class="com.kaishengit.erp.impl.OrderServiceImpl"/>
+    <bean id="partsService" class="com.kaishengit.erp.impl.PartsServiceImpl"/>
+    <bean id="rolePermissionService" class="com.kaishengit.erp.impl.RolePermissionServiceImpl"/>
+    <bean id="typeService" class="com.kaishengit.erp.impl.TypeServiceImpl"/>
+
+    <!--暴露服务-->
+    <dubbo:service interface="com.kaishengit.erp.service.CarService" ref="carService"/>
+    <dubbo:service interface="com.kaishengit.erp.service.EmployeeService" ref="employeeService"/>
+    <dubbo:service interface="com.kaishengit.erp.service.FixService" ref="fixService"/>
+    <dubbo:service interface="com.kaishengit.erp.service.OrderService" ref="orderService"/>
+    <dubbo:service interface="com.kaishengit.erp.service.PartsService" ref="partsService"/>
+    <dubbo:service interface="com.kaishengit.erp.service.RolePermissionService" ref="rolePermissionService"/>
+    <dubbo:service interface="com.kaishengit.erp.service.TypeService" ref="typeService"/>
+
+</beans>

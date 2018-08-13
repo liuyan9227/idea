@@ -18,7 +18,6 @@ import java.util.List;
  * @author liuyan
  * @date 2018/8/2
  */
-@Service
 public class CarServiceImpl implements CarService {
 
     @Autowired

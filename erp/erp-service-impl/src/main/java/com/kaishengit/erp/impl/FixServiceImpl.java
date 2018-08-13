@@ -27,7 +27,6 @@ import java.util.List;
  * @author liuyan
  * @date 2018/8/8
  */
-@Service
 public class FixServiceImpl implements FixService {
 
     @Autowired

@@ -23,7 +23,6 @@ import java.util.Map;
  * @author liuyan
  * @date 2018/7/27
  */
-@Service
 public class RolePermissionServiceImpl implements RolePermissionService {
 
     @Autowired

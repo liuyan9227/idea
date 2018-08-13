@@ -31,7 +31,6 @@ import static org.apache.camel.model.dataformat.JsonLibrary.Gson;
  * @author liuyan
  * @date 2018/8/3
  */
-@Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired

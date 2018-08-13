@@ -22,7 +22,6 @@ import java.util.Map;
  * @author liuyan
  * @date 2018/7/26
  */
-@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
