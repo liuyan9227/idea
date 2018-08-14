@@ -18,6 +18,7 @@ com\kaishengit\erp\mapper\EmployeeLoginLogMapper.class
 com\kaishengit\erp\mapper\FixOrderPartsMapper.class
 com\kaishengit\erp\mapper\PartsMapper.class
 com\kaishengit\erp\mapper\OrderEmployeeMapper.class
+com\kaishengit\erp\App.class
 com\kaishengit\erp\impl\PartsServiceImpl.class
 com\kaishengit\erp\mapper\PermissionMapper.class
 com\kaishengit\erp\mapper\OrderPartsMapper.class

@@ -8,10 +8,10 @@
     <dubbo:application name="ErpServiceProvider"/>
 
     <!--服务地址-->
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zookeeper://192.168.1.122:2181"/>
 
-    <!--指定端口-->
-    <!--<dubbo:protocol host="192.168.1.120" port="20880"/>-->
+   <!-- 指定端口-->
+    <dubbo:protocol host="192.168.1.123" port="20880"/>
 
     <!--实现类-->
     <bean id="carService" class="com.kaishengit.erp.impl.CarServiceImpl"/>
