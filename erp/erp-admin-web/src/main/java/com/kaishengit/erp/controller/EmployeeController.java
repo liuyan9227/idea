@@ -1,13 +1,10 @@
 package com.kaishengit.erp.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.kaishengit.erp.dto.ResponseBean;
 import com.kaishengit.erp.entity.Employee;
 import com.kaishengit.erp.entity.Role;
 import com.kaishengit.erp.exception.ServiceException;
 import com.kaishengit.erp.service.EmployeeService;
-import com.kaishengit.erp.utils.Constant;
 import com.kaishengit.erp.service.RolePermissionService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
@@ -135,7 +132,6 @@ public class EmployeeController {
     public String editEmployee(@PathVariable Integer id, Model model){
         // 回显员工信息
         Employee employee = employeeService.findEmployee(id);
-        System.out.println("员工信息employee----" + employee.getEmployeeName());
         // 查找所有角色信息
         List<Role> roleList = rolePermissionService.findRoleAll();
         // 回显员工的角色信息
@@ -148,8 +144,6 @@ public class EmployeeController {
 
     @PostMapping("/manage/employee/{id:\\d+}/edit")
     public String editEmployeePost(Employee employee, Integer[] roleIds){
-        System.out.println("-------------" + employee);
-        System.out.println("-------------" + roleIds);
         employeeService.edit(employee, roleIds);
         return "redirect:/account/home";
     }

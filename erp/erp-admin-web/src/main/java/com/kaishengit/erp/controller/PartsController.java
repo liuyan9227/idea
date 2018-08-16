@@ -62,7 +62,6 @@ public class PartsController {
         } else {
             throw new IOException();
         }
-
         return "parts/detail";
     }
 

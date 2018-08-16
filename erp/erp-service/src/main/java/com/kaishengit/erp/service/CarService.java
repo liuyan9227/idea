@@ -3,9 +3,6 @@ package com.kaishengit.erp.service;
 import com.kaishengit.erp.entity.Car;
 import com.kaishengit.erp.entity.Customer;
 
-import java.util.List;
-
-
 /**
  * @author liuyan
  * @date 2018/8/2
