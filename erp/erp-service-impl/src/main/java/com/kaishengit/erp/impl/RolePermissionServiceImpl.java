@@ -44,7 +44,9 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public List<Role> findRoleAll() {
-        List<Role> roleList = roleMapper.findRoleAndPermissionList();
+        // List<Role> roleList = roleMapper.findRoleAndPermissionList();
+        RoleExample roleExample = new RoleExample();
+        List<Role> roleList = roleMapper.selectByExample(roleExample);
         return roleList;
     }
 
@@ -264,7 +266,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
      */
     @Override
     public List<Role> findRoleByEmployeeId(Integer id) {
-        List<Role> roleList = roleMapper.findRoleListByEmployeeId();
+        List<Role> roleList = roleMapper.findRoleListByEmployeeId(id);
         return roleList;
     }
 

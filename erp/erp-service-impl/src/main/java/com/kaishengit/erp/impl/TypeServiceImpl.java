@@ -8,7 +8,6 @@ import com.kaishengit.erp.mapper.TypeMapper;
 import com.kaishengit.erp.service.TypeService;
 import com.kaishengit.erp.utils.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;

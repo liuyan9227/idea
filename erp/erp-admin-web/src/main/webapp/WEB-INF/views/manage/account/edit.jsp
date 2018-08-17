@@ -50,8 +50,10 @@
                         <div class="form-group">
                             <label>角色</label>
                             <div>
+
                                 <c:forEach items="${roleList}" var="role">
                                     <c:set var="flag" value="false"/>
+
                                     <c:forEach items="${employeeRoleList}" var="empRole">
                                         <c:if test="${role.id == empRole.id}">
                                             <c:set var="flag" value="true"/>
@@ -62,6 +64,7 @@
                                     <input type="checkbox" value="${role.id}" name="roleIds" ${flag ? 'checked': ''}> ${role.roleName}
                                 </div>
                                 </c:forEach>
+
                             </div>
                         </div>
                     </form>

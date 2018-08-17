@@ -128,8 +128,14 @@ public class EmployeeController {
         return "redirect:/account/home";
     }
 
+    /**
+     * 业务:修改员工信息
+     * 1.回显修改的员工个人信息
+     * 2.回显员工的角色信息
+     */
     @GetMapping("/manage/employee/{id:\\d+}/edit")
     public String editEmployee(@PathVariable Integer id, Model model){
+        System.out.println("获得的员工ID为-=-="+ id);
         // 回显员工信息
         Employee employee = employeeService.findEmployee(id);
         // 查找所有角色信息
