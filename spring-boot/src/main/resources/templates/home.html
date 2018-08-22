@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3 th:text="${name}">hello,word</h3>
+
+    <h3>hello,[[${userName}]]</h3>
+
+    <!--<h3 th:text="${param.q}"></h3>-->
+
+    <h3 th:if="${age == 26}">还我血汗钱</h3>
+
+    <th:block th:if="${age == 26}">
+        <li>哈哈</li>
+        <li>呵呵</li>
+    </th:block>
+
+    <ul>
+        <li th:if="${#lists.isEmpty(nameList)}">暂无数据</li>
+        <li th:each="name, iterStat : ${nameList}" th:text="${iterStat.odd + '->' + name}"></li>
+    </ul>
+</body>
+</html>
