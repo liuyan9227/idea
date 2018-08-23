@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///car_service
+    username: root
+    password: root
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+mybatis:
+  # entity的位置
+  type-aliases-package: com.kaishengit.entity
+  # 大小写转换并使用驼峰命名法
+  configuration:
+    map-underscore-to-camel-case: true
+  # mapper.xml的位置
+  mapper-locations: classpath:mapper/*.xml
+
+# 设置mapper的日志级别,方便查看输出的sql语句
+logging:
+  level:
+    com:
+      kaishengit:
+        mapper: debug

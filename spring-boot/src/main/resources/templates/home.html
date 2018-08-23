@@ -22,5 +22,10 @@
         <li th:if="${#lists.isEmpty(nameList)}">暂无数据</li>
         <li th:each="name, iterStat : ${nameList}" th:text="${iterStat.odd + '->' + name}"></li>
     </ul>
+
+    <ul>
+        <li th:each="car : ${carList}" th:text="${car}"></li>
+    </ul>
+
 </body>
 </html>
