@@ -1,4 +1,11 @@
 spring:
+  jms:
+    listener:
+      acknowledge-mode: client
+      concurrency: 5
+      max-concurrency: 10
+  activemq:
+    broker-url: tcp://localhost:61616
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql:///car_service
@@ -8,6 +15,10 @@ spring:
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
+#  redis:
+#    # redis所在的服务器地址
+#    host: 192.168.1.40
+#    port: 6379
 
 mybatis:
   # entity的位置
@@ -24,3 +35,8 @@ logging:
     com:
       kaishengit:
         mapper: debug
+
+redisson:
+  # 设置服务器地址及端口
+  host: redis://192.168.0.40:6379
+  timeout: 5000
