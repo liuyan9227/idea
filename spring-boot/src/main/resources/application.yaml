@@ -1,4 +1,7 @@
 spring:
+  cache:
+    ehcache:
+      config: ehcache.xml
   jms:
     listener:
       acknowledge-mode: client
@@ -15,10 +18,10 @@ spring:
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
-#  redis:
-#    # redis所在的服务器地址
-#    host: 192.168.1.40
-#    port: 6379
+  redis:
+    # redis所在的服务器地址
+    host: 192.168.1.40
+    port: 6379
 
 mybatis:
   # entity的位置
@@ -38,5 +41,11 @@ logging:
 
 redisson:
   # 设置服务器地址及端口
-  host: redis://192.168.0.40:6379
+  host: redis://192.168.1.40:6379
   timeout: 5000
+
+redis:
+  expires:
+    # 定义缓存名为xxx的缓存周期为n秒
+    car: 10
+    book: 100

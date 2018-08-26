@@ -1,0 +1,10 @@
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+
+    <cache name="car"
+           maxElementsInMemory="10000"
+           eternal="false"
+           overflowToDisk="true"
+           diskPersistent="true">
+    </cache>
+</ehcache>
