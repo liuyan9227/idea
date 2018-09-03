@@ -37,7 +37,7 @@ public class CustomerFilterChainDefinition {
     }
 
     /**
-     * 将
+     * 设置shiro规则到对象中
      */
     public void  setShiroFilter(AbstractShiroFilter shiroFilter) {
         this.shiroFilter = shiroFilter;

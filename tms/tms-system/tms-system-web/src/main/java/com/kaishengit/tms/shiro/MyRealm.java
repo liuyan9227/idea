@@ -72,10 +72,10 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
-        String username = usernamePasswordToken.getUsername();
-        if(username != null){
+        String accountMobile = usernamePasswordToken.getUsername();
+        if(accountMobile != null){
             // 查询用户信息,根据姓名返回用户对象
-            Account account = accountService.findAccountByName(username);
+            Account account = accountService.findAccountByModel(accountMobile);
             if(account != null){
                 // 查看状态是否正常............................
                 if(Account.STATE_NORMAL.equals(account.getAccountState())){
@@ -89,7 +89,7 @@ public class MyRealm extends AuthorizingRealm {
 
                     accountService.saveAccountLoginlog(accountLoginLog);
 
-                    return new SimpleAuthenticationInfo(username, usernamePasswordToken.getPassword(), getName());
+                    return new SimpleAuthenticationInfo(accountMobile, usernamePasswordToken.getPassword(), getName());
                 } else {
                     throw new LockedAccountException("账号被禁用或锁定:" + account.getAccountState());
                 }

@@ -3,8 +3,10 @@ package com.kaishengit.tms.mapper;
 import com.kaishengit.tms.entity.Customer;
 import com.kaishengit.tms.entity.CustomerExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface CustomerMapper {
     long countByExample(CustomerExample example);
 

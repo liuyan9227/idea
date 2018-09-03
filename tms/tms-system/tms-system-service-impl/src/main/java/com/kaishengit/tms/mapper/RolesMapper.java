@@ -3,8 +3,10 @@ package com.kaishengit.tms.mapper;
 import com.kaishengit.tms.entity.Roles;
 import com.kaishengit.tms.entity.RolesExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface RolesMapper {
     long countByExample(RolesExample example);
 
@@ -29,4 +31,8 @@ public interface RolesMapper {
     int updateByPrimaryKey(Roles record);
 
     List<Roles> findRolesByAccountId(Integer id);
+
+    List<Roles> findAllRolesWithPermissionList();
+
+    Roles findRolesWithPermissionListByRoleId(Integer id);
 }

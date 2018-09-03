@@ -8,9 +8,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>tms-system-service-impl</name>
-    <description></description>
-
     <parent>
         <groupId>com.kaishengit</groupId>
         <artifactId>tms-system</artifactId>
@@ -25,12 +22,6 @@
     </properties>
 
     <dependencies>
-        <!--测试用,删掉-->
-        <dependency>
-            <groupId>com.kaishengit</groupId>
-            <artifactId>tms-commons</artifactId>
-            <version>1.1</version>
-        </dependency>
 
         <!--1.实现类依赖接口-->
         <dependency>

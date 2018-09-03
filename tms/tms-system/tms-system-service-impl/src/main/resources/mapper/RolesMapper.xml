@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kaishengit.tms.mapper.RolesMapper">
-  <resultMap id="BaseResultMap" type="com.kaishengit.tms.entity.Roles">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="roles_name" jdbcType="VARCHAR" property="rolesName" />
-    <result column="roles_code" jdbcType="VARCHAR" property="rolesCode" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-  </resultMap>
+
+    <!--roles-->
+    <resultMap id="BaseResultMap" type="com.kaishengit.tms.entity.Roles">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="roles_name" jdbcType="VARCHAR" property="rolesName" />
+        <result column="roles_code" jdbcType="VARCHAR" property="rolesCode" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="rolesWithPermissionMap" type="com.kaishengit.tms.entity.Roles" extends="BaseResultMap">
+        <!--permissionList-->
+        <collection property="permissionList" ofType="com.kaishengit.tms.entity.Permission">
+            <id property="id" column="id"/>
+            <result property="permissionName" column="permission_name"/>
+            <result property="permissionCode" column="permission_code"/>
+            <result property="permissionType" column="permission_type"/>
+            <result property="parentId" column="parent_id"/>
+            <result property="createTime" column="create_time"/>
+            <result property="updateTime" column="update_time"/>
+            <result property="url" column="url"/>
+        </collection>
+
+    </resultMap>
+
+
+
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -156,13 +178,44 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="findRolesByAccountId">
+
+
+
+
+
+
+    <!--根据登录人员id查找对应的角色信息-->
+    <select id="findRolesByAccountId" resultType="com.kaishengit.tms.entity.Roles">
       SELECT *
       FROM account_roles
       LEFT JOIN roles
       on roles_id = roles.id
       where account_roles.account_id = {id}
     </select>
+    <!--角色首页显示所有角色信息和权限信息-->
+    <select id="findAllRolesWithPermissionList" resultMap="rolesWithPermissionMap">
+        select *
+        from roles
+        LEFT JOIN roles_permission
+        on roles.id = roles_permission.roles_id
+        LEFT JOIN permission
+        on roles_permission.permission_id = permission.id
+    </select>
+    <!--根据roleId查询角色和对应的权限-->
+    <select id="findRolesWithPermissionListByRoleId" resultMap="rolesWithPermissionMap">
+        select *
+        from roles
+        LEFT JOIN roles_permission
+        on roles.id = roles_permission.roles_id
+        LEFT JOIN permission
+        on roles_permission.permission_id = permission.id
+        where roles_id = {id}
+    </select>
+
+
+
+
+
     <update id="updateByExampleSelective" parameterType="map">
     update roles
     <set>

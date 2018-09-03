@@ -1,7 +1,6 @@
 package com.kaishengit.tms.controller;
 
 import com.kaishengit.tms.util.ResponseBean;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -28,8 +27,8 @@ public class HomeController {
     public String login(){
         Subject subject = SecurityUtils.getSubject();
 
-        System.out.println("isAuthenticated()?" + subject.isAuthenticated());
-        System.out.println("isRemembered()?" + subject.isRemembered());
+        /*System.out.println("isAuthenticated()?" + subject.isAuthenticated());
+        System.out.println("isRemembered()?" + subject.isRemembered());*/
 
         //判断当前是否有已经认证的账号，如果有，则退出该账号
         if(subject.isAuthenticated()) {
@@ -56,7 +55,7 @@ public class HomeController {
         // 获取登录人员的远程地址,从请求中获得
         String remoteAddr = request.getRemoteAddr();
 
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(accountMobile,DigestUtils.md2Hex(password),rememberMe!=null,remoteAddr);
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(accountMobile,password,rememberMe!=null,remoteAddr);
 
         try {
             subject.login(usernamePasswordToken);

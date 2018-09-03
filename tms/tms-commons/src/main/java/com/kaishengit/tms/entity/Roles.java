@@ -2,12 +2,18 @@ package com.kaishengit.tms.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
  */
 public class Roles implements Serializable {
     private Integer id;
+
+    /**
+     * 封装权限列表
+     */
+    private List<Permission> permissionList;
 
     /**
      * 角色名称
@@ -22,6 +28,15 @@ public class Roles implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+
+    public List<Permission> getPermissionList() {
+        return permissionList;
+    }
+
+    public void setPermissionList(List<Permission> permissionList) {
+        this.permissionList = permissionList;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -98,17 +113,13 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", rolesName=").append(rolesName);
-        sb.append(", rolesCode=").append(rolesCode);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Roles{" +
+                "id=" + id +
+                ", permissionList=" + permissionList +
+                ", rolesName='" + rolesName + '\'' +
+                ", rolesCode='" + rolesCode + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
