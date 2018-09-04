@@ -107,4 +107,10 @@ public interface RolePermissionService {
      * @param permission 权限信息
      */
     void editPermission(Permission permission);
+
+    /**
+     * 查询所有角色信息
+     * @return rolesList
+     */
+    List<Roles> findAllRoles();
 }

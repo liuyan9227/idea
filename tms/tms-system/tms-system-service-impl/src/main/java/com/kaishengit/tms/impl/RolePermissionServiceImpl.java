@@ -283,4 +283,14 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         permissionMapper.updateByPrimaryKeySelective(permission);
         logger.info("{} 在 {} 更新权限 {}",account.getAccountName(), new Date(), permission);
     }
+
+
+    /**
+     * 查询所有角色信息
+     */
+    @Override
+    public List<Roles> findAllRoles() {
+        List<Roles> rolesList = rolesMapper.selectByExample(new RolesExample());
+        return rolesList;
+    }
 }

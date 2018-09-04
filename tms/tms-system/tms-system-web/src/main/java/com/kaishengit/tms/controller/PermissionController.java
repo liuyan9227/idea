@@ -9,7 +9,6 @@ import com.kaishengit.tms.exception.ServiceException;
 import com.kaishengit.tms.service.RolePermissionService;
 import com.kaishengit.tms.shiro.CustomerFilterChainDefinition;
 import com.kaishengit.tms.util.ResponseBean;
-import com.sun.org.glassfish.external.statistics.annotations.Reset;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
